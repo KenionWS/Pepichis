@@ -680,6 +680,16 @@
                         </svg>
                         <span>Notas</span>
                     </a>
+                    <a href="{{ route('menu-items.index') }}" class="{{ request()->routeIs('menu-items.*') ? 'active' : '' }}">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+                            <path d="M4 7h16" />
+                            <path d="M4 12h12" />
+                            <path d="M4 17h9" />
+                            <path d="m16 15 4 4" />
+                            <path d="m20 15-4 4" />
+                        </svg>
+                        <span>Menu</span>
+                    </a>
                 </nav>
 
                 <div class="logout">

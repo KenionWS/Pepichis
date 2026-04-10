@@ -4,6 +4,7 @@ use App\Http\Controllers\AttributeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\MenuItemController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\ProducerController;
 use App\Http\Controllers\WineController;
@@ -43,9 +44,11 @@ Route::prefix('adminppch1s')->group(function () {
 
         Route::post('/producers/reorder', [ProducerController::class, 'reorder'])->name('producers.reorder');
         Route::post('/wines/reorder', [WineController::class, 'reorder'])->name('wines.reorder');
+        Route::post('/menu-items/reorder', [MenuItemController::class, 'reorder'])->name('menu-items.reorder');
         Route::resource('producers', ProducerController::class)->except(['show']);
         Route::resource('attributes', AttributeController::class)->except(['show']);
         Route::resource('wines', WineController::class)->except(['show']);
         Route::resource('notes', NoteController::class)->except(['show']);
+        Route::resource('menu-items', MenuItemController::class)->except(['show']);
     });
 });

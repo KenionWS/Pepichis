@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attribute;
+use App\Models\MenuItem;
 use App\Models\Note;
 use App\Models\Producer;
 use App\Models\Wine;
@@ -17,6 +18,7 @@ class DashboardController extends Controller
             'wineCount' => Wine::count(),
             'noteCount' => Note::count(),
             'attributeCount' => Attribute::count(),
+            'menuItemCount' => class_exists(MenuItem::class) ? MenuItem::count() : 0,
             'latestProducers' => Producer::latest()->take(5)->get(),
             'latestWines' => Wine::with('producer')->latest()->take(5)->get(),
             'latestNotes' => Note::orderByDesc('published_at')->orderByDesc('created_at')->take(5)->get(),

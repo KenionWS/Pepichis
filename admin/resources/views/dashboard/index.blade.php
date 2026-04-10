@@ -69,6 +69,19 @@
             <span>Características disponibles</span>
             <strong>{{ $attributeCount }}</strong>
         </div>
+        <div class="metric">
+            <div class="metric-top">
+                <div class="metric-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+                        <path d="M4 7h16" />
+                        <path d="M4 12h12" />
+                        <path d="M4 17h9" />
+                    </svg>
+                </div>
+            </div>
+            <span>Items del menu</span>
+            <strong>{{ $menuItemCount }}</strong>
+        </div>
     </div>
 
     <div class="two-col" style="margin-bottom: 20px;">

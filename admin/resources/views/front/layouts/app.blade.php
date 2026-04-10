@@ -57,10 +57,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
 <body>
-    @php
-        $homeAnchor = request()->routeIs('front.home') ? '' : route('front.home');
-    @endphp
-
     <header>
         <nav aria-label="Navegaci&oacute;n principal">
             <a href="{{ route('front.home') }}" class="logo">
@@ -68,11 +64,13 @@
                 pepichis
             </a>
             <ul class="nav-links">
-                <li><a href="{{ $homeAnchor }}#nosotros">Nosotros</a></li>
-                <li><a href="{{ $homeAnchor }}#seleccion">Selecci&oacute;n</a></li>
-                <li><a href="{{ $homeAnchor }}#productores">Productores</a></li>
-                <li><a href="{{ route('front.notes.index') }}">Notas</a></li>
-                <li><a href="{{ $homeAnchor }}#contacto">Contacto</a></li>
+                @foreach($menuItems as $menuItem)
+                    <li>
+                        <a href="{{ $menuItem->href }}" @if($menuItem->open_in_new_tab) target="_blank" rel="noopener noreferrer" @endif>
+                            {{ $menuItem->label }}
+                        </a>
+                    </li>
+                @endforeach
             </ul>
             <button class="hamburger-btn" id="hamburgerBtn" aria-label="Abrir men&uacute;">
                 <span></span><span></span><span></span>
@@ -80,11 +78,13 @@
         </nav>
         <div class="mobile-menu-overlay" id="mobileMenu">
             <ul class="mobile-nav-links">
-                <li><a href="{{ $homeAnchor }}#nosotros">Nosotros</a></li>
-                <li><a href="{{ $homeAnchor }}#seleccion">Selecci&oacute;n</a></li>
-                <li><a href="{{ $homeAnchor }}#productores">Productores</a></li>
-                <li><a href="{{ route('front.notes.index') }}">Notas</a></li>
-                <li><a href="{{ $homeAnchor }}#contacto">Contacto</a></li>
+                @foreach($menuItems as $menuItem)
+                    <li>
+                        <a href="{{ $menuItem->href }}" @if($menuItem->open_in_new_tab) target="_blank" rel="noopener noreferrer" @endif>
+                            {{ $menuItem->label }}
+                        </a>
+                    </li>
+                @endforeach
             </ul>
         </div>
     </header>
