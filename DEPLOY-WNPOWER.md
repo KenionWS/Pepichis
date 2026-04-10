@@ -24,6 +24,7 @@ APP_NAME=PepichisAdmin
 APP_ENV=production
 APP_DEBUG=false
 APP_URL=https://tu-dominio.com
+IMPORT_TOKEN=un_token_largo_y_privado
 
 DB_CONNECTION=mysql
 DB_HOST=localhost
@@ -32,6 +33,31 @@ DB_DATABASE=tu_base
 DB_USERNAME=tu_usuario
 DB_PASSWORD=tu_password
 ```
+
+## Si venis desde SQLite y no tenes SSH
+
+El repo no sube `admin/database/database.sqlite`, asi que si queres migrar datos:
+
+1. Sube temporalmente tu archivo local `admin/database/database.sqlite` al mismo path en el servidor.
+2. Configura `admin/.env` con MySQL y define `IMPORT_TOKEN`.
+3. Abre en el navegador:
+
+```text
+https://tu-dominio.com/sqlite-to-mysql.php?token=TU_IMPORT_TOKEN
+```
+
+Ese script crea las tablas principales en MySQL y copia:
+
+- `admin_users`
+- `producers`
+- `attributes`
+- `attribute_values`
+- `wines`
+- `producer_attribute_value`
+- `wine_attribute_value`
+- `notes`
+
+Cuando termine, elimina `sqlite-to-mysql.php` y el `database.sqlite` del servidor.
 
 ## Primer deploy
 
@@ -48,6 +74,8 @@ php artisan view:cache
 ```
 
 Si WNPower no permite `storage:link`, el sitio puede funcionar igual siempre que no dependas del enlace publico para archivos subidos.
+
+Si no tenes SSH, probablemente vas a tener que subir manualmente la carpeta local `admin/vendor/` al servidor despues del clone, porque Laravel la necesita para arrancar y el repo no la versiona.
 
 ## Deploys siguientes
 
