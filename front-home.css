@@ -124,7 +124,7 @@
 }
 .silhouette-img { max-width: 90%; max-height: 85%; object-fit: contain; transition: transform 0.5s ease; }
 .producer-card-container:hover .silhouette-img { transform: scale(1.03) translateY(-5px); }
-.front-label { position: relative; z-index: 2; text-align: center; width: 100%; }
+.front-label { position: relative; z-index: 2; text-align: center; width: 100%; pointer-events: none; }
 .front-label .producer-region { font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: var(--wine-red); margin-bottom: 0.4rem; }
 .front-label h3 { font-family: "TAN-NIMBUS", serif; font-size: 1.5rem; font-style: italic; font-weight: normal; color: var(--charcoal); line-height: 1.3; text-transform: lowercase; }
 .front-label .highlight { background-color: var(--wine-red); color: var(--wine-deep); padding: 0 10px; }
@@ -148,12 +148,9 @@
     justify-content: space-between;
     gap: 1rem;
     width: 100%;
-    min-height: 52px;
     margin-top: auto;
-    padding: 0.95rem 1.15rem;
+    padding: 0.95rem 0rem;
     border-radius: 16px;
-    border: 1px solid rgba(128, 0, 32, 0.16);
-    background: rgba(255, 255, 255, 0.34);
     color: var(--wine-red);
     font-size: 0.8rem;
     text-transform: uppercase;
