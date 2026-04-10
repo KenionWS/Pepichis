@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pepichis — Próximamente</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <style>
+        @font-face {
+            font-family: 'TAN-NIMBUS';
+            src: url('fonts/TAN-NIMBUS.woff2') format('woff2'),
+                url('fonts/TAN-NIMBUS.woff') format('woff'),
+                url('fonts/TAN-NIMBUS.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'GabrielSans';
+            src: url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Normal.woff2') format('woff2'),
+                url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Normal.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'GabrielSans';
+            src: url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Light.woff2') format('woff2'),
+                url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Light.otf') format('opentype');
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        :root {
+            --bg: #f4efe7;
+            --surface: #fbf7f1;
+            --text: #2f2926;
+            --muted: #736863;
+            --accent: #8f1d2c;
+            --accent-soft: #d5a56a;
+            --line: rgba(47, 41, 38, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'GabrielSans', sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top left, rgba(213, 165, 106, 0.18), transparent 28%),
+                linear-gradient(180deg, #f7f2ea 0%, #f4efe7 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 600px;
+            padding: 2rem;
+        }
+
+        .logo {
+            font-family: "TAN-NIMBUS", serif;
+            font-size: 2.6rem;
+            letter-spacing: 1px;
+            text-transform: lowercase;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: font-size 0.35s ease, gap 0.35s ease;
+            justify-content: center;
+            color: #8d1d2b;
+            text-decoration: none;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'TAN-NIMBUS', serif;
+            font-size: 3rem;
+            font-weight: normal;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+            letter-spacing: 0.05em;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--muted);
+            margin-bottom: 3rem;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .contact-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .contact-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.9rem 1.8rem;
+            background: var(--surface);
+            color: var(--accent);
+            text-decoration: none;
+            border-radius: 8px;
+            border: 1px solid var(--line);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .contact-links a:hover {
+            background: var(--accent);
+            color: var(--surface);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .divider {
+            width: 60px;
+            height: 1px;
+            background: var(--line);
+            margin: 2rem auto;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="mailto:wines@pepichis.com.ar" class="logo">
+            <img class="wine-glass-icon" src="pepichis_logo.png" alt="Pepichis">
+            pepichis
+        </a>
+
+        <h1>próximamente</h1>
+
+        <div class="divider"></div>
+
+        <div class="contact-section">
+
+            <div class="contact-links">
+                <a href="mailto:wines@pepichis.com.ar">
+                    <span>✉</span>
+                    wines@pepichis.com.ar
+                </a>
+                <a href="https://instagram.com/pepichis.wines" target="_blank">
+                    <span>📱</span>
+                    @pepichis
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

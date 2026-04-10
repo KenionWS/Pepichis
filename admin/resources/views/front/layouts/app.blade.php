@@ -100,7 +100,7 @@
             <div class="footer-links">
                 <h4>Contacto</h4>
                 <ul>
-                    <li><a href="mailto:wines@pepichis.com">wines@pepichis.com</a></li>
+                    <li><a href="mailto:wines@pepichis.com.ar">wines@pepichis.com.ar</a></li>
                     <li><a href="https://www.instagram.com/pepichis.wines/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
                 </ul>
             </div>
