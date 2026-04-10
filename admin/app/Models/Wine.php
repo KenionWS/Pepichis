@@ -16,9 +16,14 @@ class Wine extends Model
         'name',
         'slug',
         'sort_order',
+        'show_on_home',
         'image_path',
         'short_description',
         'long_description',
+    ];
+
+    protected $casts = [
+        'show_on_home' => 'boolean',
     ];
 
     public function producer(): BelongsTo

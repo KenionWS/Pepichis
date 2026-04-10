@@ -57,7 +57,9 @@ class WineController extends Controller
     public function create(): View
     {
         return view('wines.form', [
-            'wine' => new Wine(),
+            'wine' => new Wine([
+                'show_on_home' => false,
+            ]),
             'producers' => Producer::orderBy('name')->get(),
             'attributes' => $this->wineAttributes(),
             'selectedAttributeValues' => [],
@@ -151,10 +153,13 @@ class WineController extends Controller
         return $request->validate([
             'producer_id' => ['required', 'exists:producers,id'],
             'name' => ['required', 'string', 'max:255'],
+            'show_on_home' => ['nullable', 'boolean'],
             'image' => ['nullable', 'image', 'max:5120'],
             'short_description' => ['nullable', 'string'],
             'long_description' => ['nullable', 'string'],
-        ]);
+        ]) + [
+            'show_on_home' => $request->boolean('show_on_home'),
+        ];
     }
 
     private function wineAttributes()

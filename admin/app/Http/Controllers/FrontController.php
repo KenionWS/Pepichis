@@ -19,7 +19,13 @@ class FrontController extends Controller
             ->orderBy('name')
             ->get();
 
-        $bottleItems = $producers->flatMap->wines->values();
+        $bottleItems = $producers->flatMap(function ($producer) {
+            return $producer->wines->where('show_on_home', true)->values();
+        })->values();
+
+        if ($bottleItems->isEmpty()) {
+            $bottleItems = $producers->flatMap->wines->values();
+        }
 
         if ($bottleItems->isNotEmpty()) {
             while ($bottleItems->count() < 24) {

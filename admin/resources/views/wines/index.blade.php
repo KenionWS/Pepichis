@@ -94,6 +94,7 @@
                     <th>Imagen</th>
                     <th>Nombre</th>
                     <th>Productor</th>
+                    <th>Home</th>
                     <th>Caracter&iacute;sticas</th>
                     <th>Acciones</th>
                 </tr>
@@ -131,6 +132,11 @@
                         </td>
                         <td>{{ optional($wine->producer)->name }}</td>
                         <td>
+                            <span class="pill" style="{{ $wine->show_on_home ? 'background: rgba(220,231,141,.35); color:#4d6312;' : 'background: rgba(128,0,32,.1); color:#800020;' }}">
+                                {{ $wine->show_on_home ? 'Visible' : 'Oculto' }}
+                            </span>
+                        </td>
+                        <td>
                             <div class="pill-list">
                                 @foreach($wine->attributeValues as $value)
                                     <span class="pill">{{ $value->attribute->name }}: {{ $value->value }}</span>
@@ -161,7 +167,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="{{ $canReorder ? 6 : 5 }}">
+                        <td colspan="{{ $canReorder ? 7 : 6 }}">
                             <div class="empty-state">
                                 <div class="empty-state-icon">
                                     <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">

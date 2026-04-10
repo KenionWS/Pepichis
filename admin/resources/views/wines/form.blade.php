@@ -43,6 +43,13 @@
                     <img src="{{ asset($wine->image_path) }}" alt="{{ $wine->name }}" class="thumb">
                 @endif
             </div>
+            <div class="form-field">
+                <label class="checkbox-field">
+                    <input type="checkbox" name="show_on_home" value="1" {{ old('show_on_home', $wine->show_on_home) ? 'checked' : '' }}>
+                    <span>Mostrar en la home</span>
+                </label>
+                <div class="help">Si está activo, este vino puede aparecer en el bloque visual principal del home.</div>
+            </div>
 
             @include('partials.rich-text-editor', [
                 'id' => 'short_description',
