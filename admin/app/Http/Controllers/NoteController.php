@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Note;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -70,6 +71,20 @@ class NoteController extends Controller
         $note->delete();
 
         return redirect()->route('notes.index')->with('success', 'Nota eliminada.');
+    }
+
+    public function storeEditorImage(Request $request): JsonResponse
+    {
+        $request->validate([
+            'image' => ['required', 'image', 'max:6144'],
+        ]);
+
+        $path = $this->storeImage($request, 'notes/inline', 'image');
+
+        return response()->json([
+            'url' => asset($path),
+            'path' => $path,
+        ]);
     }
 
     private function validatedData(Request $request): array

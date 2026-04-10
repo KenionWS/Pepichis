@@ -2,6 +2,13 @@
     <label for="{{ $id }}_editor">{{ $label }}</label>
     <div class="rich-editor" data-rich-editor>
         <div class="rich-editor-toolbar">
+            @if(!empty($blockFormats))
+                <select data-action="formatBlock" title="Tipo de bloque">
+                    @foreach($blockFormats as $tag => $blockLabel)
+                        <option value="{{ $tag }}">{{ $blockLabel }}</option>
+                    @endforeach
+                </select>
+            @endif
             <button type="button" data-command="bold" title="Negrita">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
                     <path d="M7 5h6a4 4 0 0 1 0 8H7z" />
@@ -63,6 +70,23 @@
                     <path d="m6 9 4-4" />
                 </svg>
             </button>
+            @if(!empty($imageUploadUrl))
+                <button type="button" data-action="image" title="Insertar imagen">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                        <rect x="3" y="5" width="18" height="14" rx="2" />
+                        <circle cx="9" cy="10" r="1.5" />
+                        <path d="m21 16-4.5-4.5L8 20" />
+                    </svg>
+                </button>
+                <input
+                    type="file"
+                    accept="image/*"
+                    class="rich-editor-hidden"
+                    data-image-input
+                    data-upload-url="{{ $imageUploadUrl }}"
+                    data-upload-token="{{ csrf_token() }}"
+                >
+            @endif
         </div>
         <div
             id="{{ $id }}_editor"
