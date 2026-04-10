@@ -8,6 +8,8 @@ Thumbs.db
 
 # Root runtime/content
 uploads/
+uploads.zip
+admin/vendor.zip
 
 # Laravel app
 /admin/.env
