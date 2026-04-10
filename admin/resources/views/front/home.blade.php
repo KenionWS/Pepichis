@@ -107,40 +107,4 @@
         </div>
     </section>
 
-    @if($latestNotes->isNotEmpty())
-        <section class="home-notes" id="notas">
-            <div class="home-notes-inner">
-                <div class="home-notes-head">
-                    <div>
-                        <div class="notes-kicker">Notas</div>
-                        <h2 class="section-title">historias, novedades y contexto para seguir explorando</h2>
-                    </div>
-                    <a href="{{ route('front.notes.index') }}" class="note-link">Ver todas las notas</a>
-                </div>
-
-                <div class="home-notes-grid">
-                    @foreach($latestNotes as $note)
-                        <article class="home-note-card">
-                            <div class="home-note-media">
-                                @if($note->cover_image_path)
-                                    <img src="{{ asset($note->cover_image_path) }}" alt="{{ $note->title }}" loading="lazy">
-                                @endif
-                            </div>
-                            <div class="home-note-content">
-                                <div class="note-meta">
-                                    @if($note->published_at)
-                                        <span>{{ $note->published_at->translatedFormat('d M Y') }}</span>
-                                    @endif
-                                </div>
-                                <h3>{{ $note->title }}</h3>
-                                <p>{{ \Illuminate\Support\Str::limit(trim(strip_tags($note->excerpt ?: $note->body)), 160) }}</p>
-                                <a href="{{ route('front.notes.show', $note->slug) }}" class="note-link">Leer nota</a>
-                            </div>
-                        </article>
-                    @endforeach
-                </div>
-            </div>
-        </section>
-    @endif
-
 @endsection
