@@ -508,7 +508,33 @@
             box-shadow: 0 0 0 4px rgba(109, 24, 52, 0.08);
             transform: translateY(-1px);
         }
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin: 0;
+            padding: 0;
+            border-radius: 6px;
+            transform: none;
+            box-shadow: none;
+            accent-color: var(--wine);
+            flex: 0 0 auto;
+        }
+        input[type="checkbox"]:focus {
+            transform: none;
+            box-shadow: 0 0 0 4px rgba(109, 24, 52, 0.08);
+        }
         textarea { min-height: 130px; resize: vertical; }
+        .checkbox-field {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-height: 52px;
+            padding: 14px 16px;
+            border: 1px solid rgba(150, 113, 94, 0.18);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+        }
         .help, .pill {
             color: var(--muted);
             font-size: 10px;

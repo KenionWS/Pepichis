@@ -30,8 +30,8 @@
             <div class="form-field">
                 <label for="item_type">Tipo de destino</label>
                 <select id="item_type" name="item_type" data-menu-type-selector>
-                    @foreach($typeOptions as $value => $label)
-                        <option value="{{ $value }}" @selected(old('item_type', $menuItem->item_type) === $value)>{{ $label }}</option>
+                    @foreach($typeOptions as $value => $optionLabel)
+                        <option value="{{ $value }}" {{ old('item_type', $menuItem->item_type) === $value ? 'selected' : '' }}>{{ $optionLabel }}</option>
                     @endforeach
                 </select>
             </div>
@@ -40,8 +40,8 @@
                 <label for="home_section">Seccion del home</label>
                 <select id="home_section" name="home_section">
                     <option value="">Selecciona una seccion</option>
-                    @foreach($homeSectionOptions as $value => $label)
-                        <option value="{{ $value }}" @selected(old('home_section', $menuItem->item_type === \App\Models\MenuItem::TYPE_HOME_SECTION ? $menuItem->item_value : null) === $value)>{{ $label }}</option>
+                    @foreach($homeSectionOptions as $value => $optionLabel)
+                        <option value="{{ $value }}" {{ old('home_section', $menuItem->item_type === \App\Models\MenuItem::TYPE_HOME_SECTION ? $menuItem->item_value : null) === $value ? 'selected' : '' }}>{{ $optionLabel }}</option>
                     @endforeach
                 </select>
             </div>
@@ -50,8 +50,8 @@
                 <label for="route_name">Ruta interna</label>
                 <select id="route_name" name="route_name">
                     <option value="">Selecciona una ruta</option>
-                    @foreach($routeOptions as $value => $label)
-                        <option value="{{ $value }}" @selected(old('route_name', $menuItem->item_type === \App\Models\MenuItem::TYPE_ROUTE ? $menuItem->item_value : null) === $value)>{{ $label }}</option>
+                    @foreach($routeOptions as $value => $optionLabel)
+                        <option value="{{ $value }}" {{ old('route_name', $menuItem->item_type === \App\Models\MenuItem::TYPE_ROUTE ? $menuItem->item_value : null) === $value ? 'selected' : '' }}>{{ $optionLabel }}</option>
                     @endforeach
                 </select>
             </div>
@@ -63,14 +63,14 @@
             </div>
 
             <div class="form-field">
-                <label style="display:flex; align-items:center; gap:10px; min-height:48px;">
+                <label class="checkbox-field">
                     <input type="checkbox" name="is_active" value="1" {{ old('is_active', $menuItem->is_active) ? 'checked' : '' }}>
                     <span>Visible en el menu</span>
                 </label>
             </div>
 
             <div class="form-field">
-                <label style="display:flex; align-items:center; gap:10px; min-height:48px;">
+                <label class="checkbox-field">
                     <input type="checkbox" name="open_in_new_tab" value="1" {{ old('open_in_new_tab', $menuItem->open_in_new_tab) ? 'checked' : '' }}>
                     <span>Abrir en nueva pestaña</span>
                 </label>
