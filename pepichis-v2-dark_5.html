@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pepichis - Importamos los vinos que nos gusta tomar</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <style>
+        /* FONT FACES */
+        @font-face {
+            font-family: 'TAN-NIMBUS';
+            src: url('fonts/TAN-NIMBUS.woff2') format('woff2'),
+                url('fonts/TAN-NIMBUS.woff') format('woff'),
+                url('fonts/TAN-NIMBUS.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'GabrielSans';
+            src: url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Thin.woff2') format('woff2'),
+                url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Thin.otf') format('opentype');
+            font-weight: 100;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'GabrielSans';
+            src: url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Thin-Italic.woff2') format('woff2'),
+                url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Thin-Italic.otf') format('opentype');
+            font-weight: 100;
+            font-style: italic;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'GabrielSans';
+            src: url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Light.woff2') format('woff2'),
+                url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Light.otf') format('opentype');
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'GabrielSans';
+            src: url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Light-Italic.woff2') format('woff2'),
+                url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Light-Italic.otf') format('opentype');
+            font-weight: 300;
+            font-style: italic;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'GabrielSans';
+            src: url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Normal.woff2') format('woff2'),
+                url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Normal.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'GabrielSans';
+            src: url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Normal-Italic.woff2') format('woff2'),
+                url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Normal-Italic.otf') format('opentype');
+            font-weight: 400;
+            font-style: italic;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'GabrielSans';
+            src: url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Medium.woff2') format('woff2'),
+                url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Medium.otf') format('opentype');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'GabrielSans';
+            src: url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Medium-Italic.woff2') format('woff2'),
+                url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Medium-Italic.otf') format('opentype');
+            font-weight: 500;
+            font-style: italic;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'GabrielSans';
+            src: url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Bold.woff2') format('woff2'),
+                url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Bold.otf') format('opentype');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'GabrielSans';
+            src: url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Bold-Italic.woff2') format('woff2'),
+                url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Bold-Italic.otf') format('opentype');
+            font-weight: 700;
+            font-style: italic;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'GabrielSans';
+            src: url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Black.woff2') format('woff2'),
+                url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Black.otf') format('opentype');
+            font-weight: 900;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'GabrielSans';
+            src: url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Black-Italic.woff2') format('woff2'),
+                url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Black-Italic.otf') format('opentype');
+            font-weight: 900;
+            font-style: italic;
+            font-display: swap;
+        }
+
+        :root {
+            --wine-deep: #f7f1ea;
+            --wine-red: #800020;
+            --wine-light: #fdc9e4;
+            --accent-green: #c9dc6b;
+            --cream: #ede7df;
+            --charcoal: #484646;
+            --lavender: #c3c3ff;
+            --pink: #fdc9e4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'GabrielSans', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            overflow-x: hidden;
+        }
+
+        /* PAPER TEXTURE OVERLAY */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                repeating-linear-gradient(0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(72, 70, 70, 0.02) 2px,
+                    rgba(72, 70, 70, 0.02) 4px);
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.3;
+        }
+
+        /* HEADER */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.5rem 4rem;
+            background: rgb(247 241 234 / 80%);
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid var(--lavender);
+            transition: padding 0.35s ease;
+        }
+
+        header.header-scrolled {
+            padding: 0.6rem 4rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'TAN-NIMBUS', serif;
+            font-size: 1.6rem;
+            font-weight: normal;
+            color: var(--wine-red);
+            letter-spacing: 3px;
+            text-transform: lowercase;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: font-size 0.35s ease, gap 0.35s ease;
+        }
+
+        header.header-scrolled .logo {
+            font-size: 1.2rem;
+            gap: 0.5rem;
+        }
+
+        .wine-glass-icon {
+            width: 35px;
+            height: 35px;
+            object-fit: contain;
+            transition: width 0.35s ease, height 0.35s ease;
+        }
+
+        header.header-scrolled .wine-glass-icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+            transition: gap 0.35s ease;
+        }
+
+        header.header-scrolled .nav-links {
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--charcoal);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0px;
+            text-transform: uppercase;
+            position: relative;
+            transition: all 0.35s ease;
+        }
+
+        header.header-scrolled .nav-links a {
+            font-size: 0.8rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-green);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--wine-red);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8rem;
+            padding-top: 4rem;
+            overflow: hidden;
+            background-color: var(--pink);
+        }
+
+        .hero-content {
+            position: relative;
+            max-width: 800px;
+            z-index: 2;
+        }
+
+        .hero-illustration {
+            position: relative;
+            z-index: 1;
+            width: 30%;
+            max-width: 350px;
+        }
+
+        .hero-illustration img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 20px 40px rgba(128, 0, 32, 0.15));
+        }
+
+
+        .hero h1 {
+            font-family: 'TAN-NIMBUS', serif;
+            font-size: 3rem;
+            font-weight: normal;
+            line-height: 1.5;
+            margin-bottom: 2rem;
+            font-style: italic;
+            text-transform: lowercase;
+            color: var(--wine-red);
+        }
+
+        .hero h1 .highlight {
+            color: var(--wine-deep);
+            font-weight: normal;
+            font-style: italic;
+            background-color: var(--wine-red);
+            padding: 0px 10px;
+        }
+
+        .hero h1 .typing-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1em;
+            background-color: var(--wine-deep);
+            margin-left: 2px;
+            vertical-align: text-bottom;
+            animation: blink-cursor 0.4s step-end infinite;
+        }
+
+        @keyframes blink-cursor {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            line-height: 1.6;
+            font-weight: 400;
+            max-width: 600px;
+            letter-spacing: 1px;
+            color: var(--wine-red);
+            text-transform: uppercase;
+        }
+
+        /* BOTTLES SCROLL SECTION */
+        .split-intro {
+            position: relative;
+        }
+
+        .bottles-sticky {
+            position: relative;
+            min-height: 100vh;
+            padding-top: 5vh;
+            padding-bottom: 5vh;
+            overflow: hidden;
+            background: var(--accent-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bottles-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 3rem 5rem;
+            padding: 2rem 3rem;
+            width: 100%;
+            max-width: 1600px;
+            align-items: end;
+        }
+
+        .bottle-row {
+            display: contents;
+        }
+
+        .bottle-item {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(80px);
+        }
+
+        .bottle-item img {
+            width: 100%;
+            max-height: 175px;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
+            transition: transform 0.4s ease;
+        }
+
+        .bottle-item img:hover {
+            transform: scale(1.08) translateY(-5px);
+        }
+
+
+
+        /* PRODUCERS GRID */
+        .producers-section {
+            padding: 5rem 6rem;
+            background: var(--lavender);
+            position: relative;
+        }
+
+        .section-header {
+            margin-bottom: 6rem;
+        }
+
+        .section-title {
+            font-family: 'TAN-NIMBUS', serif;
+            font-size: 3rem;
+            font-style: italic;
+            font-weight: normal;
+            line-height: 1.5;
+            max-width: 800px;
+            color: var(--wine-red);
+            text-transform: lowercase;
+        }
+
+        .producers-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            max-width: 1600px;
+            margin: 0 auto;
+            justify-content: center;
+        }
+
+        /* FLIP CARD CONTAINER */
+        .producer-card-container {
+            width: calc((100% - 5rem) / 3);
+            height: 400px;
+            perspective: 1500px;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(60px);
+        }
+
+        .producer-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+            transform-style: preserve-3d;
+            -webkit-transform-style: preserve-3d;
+        }
+
+        .producer-card-container.flipped .producer-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .producer-card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        /* FRONT FACE - Silhouette */
+        .producer-card-front {
+            background: var(--wine-deep);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 2.5rem 2rem;
+            position: relative;
+        }
+
+        /*.producer-card-container:nth-child(1) .producer-card-front {
+            background: #e8e1d5;
+        }
+
+        .producer-card-container:nth-child(2) .producer-card-front {
+            background: #dde0d6;
+        }
+
+        .producer-card-container:nth-child(3) .producer-card-front {
+            background: #e3ddd5;
+        }
+
+        .producer-card-container:nth-child(4) .producer-card-front {
+            background: #ddd8d2;
+        }
+
+        .producer-card-container:nth-child(5) .producer-card-front {
+            background: #dfe2da;
+        }*/
+
+        .silhouette-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            overflow: hidden;
+        }
+
+        .silhouette-img {
+            max-width: 90%;
+            max-height: 85%;
+            object-fit: contain;
+            /* CSS contour effect: stacked drop-shadows in all directions */
+            /*filter:
+                drop-shadow(0 0 1px rgba(128, 0, 32, 0.5)) drop-shadow(1px 0 0 rgba(128, 0, 32, 0.35)) drop-shadow(-1px 0 0 rgba(128, 0, 32, 0.35)) drop-shadow(0 1px 0 rgba(128, 0, 32, 0.35)) drop-shadow(0 -1px 0 rgba(128, 0, 32, 0.35)) drop-shadow(2px 0 0 rgba(128, 0, 32, 0.2)) drop-shadow(-2px 0 0 rgba(128, 0, 32, 0.2)) drop-shadow(0 2px 0 rgba(128, 0, 32, 0.2)) drop-shadow(0 -2px 0 rgba(128, 0, 32, 0.2));*/
+            transition: transform 0.5s ease, filter 0.5s ease;
+        }
+
+        .producer-card-container:hover .silhouette-img {
+            transform: scale(1.03) translateY(-5px);
+            /*filter:
+                drop-shadow(0 0 2px rgba(128, 0, 32, 0.6)) drop-shadow(2px 0 0 rgba(128, 0, 32, 0.4)) drop-shadow(-2px 0 0 rgba(128, 0, 32, 0.4)) drop-shadow(0 2px 0 rgba(128, 0, 32, 0.4)) drop-shadow(0 -2px 0 rgba(128, 0, 32, 0.4)) drop-shadow(3px 0 0 rgba(128, 0, 32, 0.25)) drop-shadow(-3px 0 0 rgba(128, 0, 32, 0.25)) drop-shadow(0 3px 0 rgba(128, 0, 32, 0.25)) drop-shadow(0 -3px 0 rgba(128, 0, 32, 0.25)) drop-shadow(0 8px 20px rgba(0, 0, 0, 0.15));*/
+        }
+
+        .front-label {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            width: 100%;
+            transition: all 500ms;
+        }
+
+
+        .front-label .producer-region {
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--wine-red);
+            margin-bottom: 0.4rem;
+        }
+
+        .front-label h3 {
+            font-family: 'TAN-NIMBUS', serif;
+            font-size: 1.5rem;
+            font-weight: normal;
+            font-style: italic;
+            color: var(--charcoal);
+            line-height: 1.3;
+            text-transform: lowercase;
+        }
+
+        .front-label .highlight {
+            background-color: var(--wine-red);
+            color: var(--wine-deep);
+            padding: 0px 10px;
+        }
+
+        .flip-hint {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--wine-red);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .producer-card-container:hover .flip-hint {
+            opacity: 0.5;
+        }
+
+        /* BACK FACE - Producer Info */
+        .producer-card-back {
+            background: var(--wine-deep);
+            transform: rotateY(180deg);
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: var(--charcoal);
+            position: absolute;
+            top: 0;
+        }
+
+        .producer-card-back::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 0%, rgba(128, 0, 32, 0.04) 100%);
+            pointer-events: none;
+        }
+
+        .producer-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .producer-content .producer-region {
+            font-size: 0.6rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--wine-red);
+            margin-bottom: 0.8rem;
+            opacity: 0.8;
+        }
+
+        .producer-card-back h3 {
+            font-family: 'TAN-NIMBUS', serif;
+            font-size: 1.5em;
+            font-weight: normal;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            color: var(--charcoal);
+            text-transform: lowercase;
+        }
+
+        .producer-card-back p {
+            font-size: 0.7rem;
+            font-weight: 400;
+            line-height: 1.75;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+        }
+
+        .producer-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--wine-red);
+            text-decoration: none;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: gap 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .producer-link:hover {
+            gap: 1rem;
+        }
+
+        .producer-link::after {
+            content: '→';
+        }
+
+        .back-flip-hint {
+            position: absolute;
+            bottom: 1.2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--wine-red);
+            opacity: 0.4;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 6rem 4rem 3rem;
+            background: var(--wine-deep);
+            border-top: 1px solid rgba(128, 0, 32, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand h3 {
+            font-family: 'TAN-NIMBUS', serif;
+            font-size: 2.5rem;
+            font-weight: normal;
+            margin-bottom: 1rem;
+            color: #800020;
+        }
+
+        .footer-brand p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            opacity: 0.7;
+        }
+
+        .footer-links h4 {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            color: var(--charcoal);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--charcoal);
+            text-decoration: none;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--wine-red);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(128, 0, 32, 0.1);
+            opacity: 0.5;
+            font-size: 0.85rem;
+        }
+
+        /* HAMBURGER BUTTON */
+        .hamburger-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 6px;
+            z-index: 1100;
+            position: relative;
+        }
+
+        .hamburger-btn span {
+            display: block;
+            width: 26px;
+            height: 2px;
+            background: var(--wine-red);
+            margin: 6px 0;
+            border-radius: 2px;
+            transition: transform 0.35s ease, opacity 0.25s ease;
+        }
+
+        .hamburger-btn.active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .hamburger-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-btn.active span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        /* MOBILE MENU OVERLAY */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 50vh;
+            background: rgb(247 241 234 / 95%);
+            backdrop-filter: blur(12px);
+            z-index: 1050;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .mobile-nav-links a {
+            color: var(--charcoal);
+            text-decoration: none;
+            font-size: 1.4rem;
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav-links a:hover {
+            color: var(--wine-red);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.25rem;
+            }
+
+            .bottles-grid {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 1rem;
+                padding: 2rem 1.5rem;
+            }
+
+            .bottle-item img {
+                max-height: 160px;
+            }
+
+            .producer-card-container {
+                width: 100%;
+                height: 450px;
+            }
+
+            .front-label h3 {
+                font-size: 1.4rem;
+            }
+
+            .producer-card-container.flipped .front-label {
+                opacity: 0;
+                transform: translateY(100%);
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger-btn {
+                display: block;
+            }
+
+            footer {
+                padding: 2rem;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+
+            .producers-section {
+                padding: 3rem 2rem;
+            }
+
+            .hero {
+                padding: 0 2rem;
+                padding-top: 8rem;
+                flex-direction: column;
+            }
+
+            .hero-illustration {
+                position: relative;
+                z-index: 1;
+                width: 75%;
+                margin-bottom: 50px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <nav>
+            <div class="logo">
+                <img class="wine-glass-icon" src="pepichis_logo.png" alt="Pepichis">
+                pepichis
+            </div>
+            <ul class="nav-links">
+                <li><a href="#historia">Historia</a></li>
+                <li><a href="#productores">Productores</a></li>
+                <li><a href="#seleccion">Selección</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="Abrir menú">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+        <!-- Mobile menu overlay -->
+        <div class="mobile-menu-overlay" id="mobileMenu">
+            <ul class="mobile-nav-links">
+                <li><a href="#historia">Historia</a></li>
+                <li><a href="#productores">Productores</a></li>
+                <li><a href="#seleccion">Selección</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
+
+            <h1 id="hero-typed"></h1>
+            <p id="hero-typed-p"></p>
+        </div>
+        <div class="hero-illustration" id="hero-copas">
+            <img src="copas.svg" alt="Copas de vino">
+        </div>
+    </section>
+
+    <!-- BOTTLES SCROLL SECTION -->
+    <section class="split-intro" id="historia">
+        <div class="bottles-sticky">
+            <div class="bottles-grid">
+                <!-- Row 1 -->
+                <div class="bottle-item" data-row="1"><img src="vinos/Chiara-Condello-Le-Lucciole.png"
+                        alt="Chiara Condello Le Lucciole"></div>
+                <div class="bottle-item" data-row="1"><img src="vinos/wasenhaus filzen chardonnay.png"
+                        alt="Wasenhaus Filzen Chardonnay"></div>
+                <div class="bottle-item" data-row="1"><img src="vinos/Wasenhaus-Grand-Ordinaire.webp"
+                        alt="Wasenhaus Grand Ordinaire"></div>
+                <div class="bottle-item" data-row="1"><img src="vinos/joly coulee de la serrant.webp"
+                        alt="Joly Coulée de la Serrant"></div>
+                <div class="bottle-item" data-row="1"><img src="vinos/Phelan Farm Chardonnay.webp"
+                        alt="Phelan Farm Chardonnay"></div>
+                <div class="bottle-item" data-row="1"><img src="vinos/wasenhaus spatburgunder.webp"
+                        alt="Wasenhaus Spätburgunder"></div>
+                <div class="bottle-item" data-row="1"><img src="vinos/Chiara-Condello-Lo-Starlisco.png"
+                        alt="Chiara Condello Lo Starlisco"></div>
+                <div class="bottle-item" data-row="1"><img src="vinos/domaine aux moines.webp" alt="Domaine aux Moines">
+                </div>
+                <!-- Row 2 -->
+                <div class="bottle-item" data-row="2"><img src="vinos/Phelan-Farm-Pinot-Noir.png"
+                        alt="Phelan Farm Pinot Noir"></div>
+                <div class="bottle-item" data-row="2"><img src="vinos/joly les vieux clos.webp"
+                        alt="Joly Les Vieux Clos"></div>
+                <div class="bottle-item" data-row="2"><img src="vinos/wasenhaus hohlen chardonnay.webp"
+                        alt="Wasenhaus Hohlen Chardonnay"></div>
+                <div class="bottle-item" data-row="2"><img src="vinos/Chiara-condello-Predappio.png"
+                        alt="Chiara Condello Predappio"></div>
+                <div class="bottle-item" data-row="2"><img src="vinos/wasenhaus mohlin spatburgunder.webp"
+                        alt="Wasenhaus Möhlin Spätburgunder"></div>
+                <div class="bottle-item" data-row="2"><img src="vinos/phelan brij chardonnay.jpg"
+                        alt="Phelan Brij Chardonnay"></div>
+                <div class="bottle-item" data-row="2"><img src="vinos/wasenhaus weissburgunder.png"
+                        alt="Wasenhaus Weissburgunder"></div>
+                <div class="bottle-item" data-row="2"><img src="vinos/wasenhaus kalk spatburgunder.webp"
+                        alt="Wasenhaus Kalk Spätburgunder"></div>
+                <!-- Row 3 -->
+                <div class="bottle-item" data-row="3"><img src="vinos/wasenhaus-bellen-spatburgunder.png"
+                        alt="Wasenhaus Bellen Spätburgunder"></div>
+                <div class="bottle-item" data-row="3"><img src="vinos/wasenhaus mohlin weissburgunder.png"
+                        alt="Wasenhaus Möhlin Weissburgunder"></div>
+                <div class="bottle-item" data-row="3"><img src="vinos/phelan oso brij rouge.webp"
+                        alt="Phelan Oso Brij Rouge"></div>
+                <div class="bottle-item" data-row="3"><img src="vinos/wasenhaus-hohlen-spatburgunder.png"
+                        alt="Wasenhaus Hohlen Spätburgunder"></div>
+                <!-- Repeat some bottles to fill row 3 -->
+                <div class="bottle-item" data-row="3"><img src="vinos/Wasenhaus-Grand-Ordinaire.webp"
+                        alt="Wasenhaus Grand Ordinaire"></div>
+                <div class="bottle-item" data-row="3"><img src="vinos/joly coulee de la serrant.webp"
+                        alt="Joly Coulée de la Serrant"></div>
+                <div class="bottle-item" data-row="3"><img src="vinos/Phelan Farm Chardonnay.webp"
+                        alt="Phelan Farm Chardonnay"></div>
+                <div class="bottle-item" data-row="3"><img src="vinos/Chiara-Condello-Le-Lucciole.png"
+                        alt="Chiara Condello Le Lucciole"></div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PRODUCERS GRID -->
+    <section class="producers-section" id="productores">
+        <div class="section-header">
+            <h2 class="section-title">Detrás de cada botella<br>hay una mirada única</h2>
+        </div>
+
+        <div class="producers-grid">
+            <!-- Phelan Farm -->
+            <div class="producer-card-container">
+                <div class="producer-card-inner">
+                    <div class="producer-card-face producer-card-front">
+                        <div class="silhouette-wrapper">
+                            <img class="silhouette-img" src="productores/Rajat-Parr-Phelan-Farm-2-Illustracion.png"
+                                alt="Rajat Parr - Phelan Farm">
+                        </div>
+                        <div class="front-label">
+                            <div class="producer-region"><span class="highlight">Cambria, California</span></div>
+                            <h3><span class="highlight">Phelan Farm</span></h3>
+                        </div>
+                    </div>
+                    <div class="producer-card-face producer-card-back">
+                        <div class="producer-content">
+                            <div class="producer-region">Cambria, San Luis Obispo Coast, California</div>
+                            <h3>Phelan Farm</h3>
+                            <p>Viñedo marcado por la influencia directa del Pacífico. Liderado por Rajat Parr, el
+                                proyecto prioriza equilibrio, energía y claridad por sobre la potencia, con una
+                                agricultura cuidadosa y vinificación precisa.</p>
+                            <a href="#" class="producer-link">Explorar vinos</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nicolas Joly -->
+            <div class="producer-card-container">
+                <div class="producer-card-inner">
+                    <div class="producer-card-face producer-card-front">
+                        <div class="silhouette-wrapper">
+                            <img class="silhouette-img"
+                                src="productores/virginie-y-nicolas-joly-coulee-de-la-serrant-Illustracion.png"
+                                alt="Nicolas Joly">
+                        </div>
+                        <div class="front-label">
+                            <div class="producer-region"><span class="highlight">Savennières, Loire, Francia</span>
+                            </div>
+                            <h3><span class="highlight">Nicolas Joly</span></h3>
+                        </div>
+                    </div>
+                    <div class="producer-card-face producer-card-back">
+                        <div class="producer-content">
+                            <div class="producer-region"><span class="highlight">Savennières, Loire, Francia</span>
+                            </div>
+                            <h3><span class="highlight">Nicolas Joly</span></h3>
+                            <p>Figura central de la biodinámica mundial. Su parcela Coulée de Serrant es una de las
+                                pocas apelaciones monopole de Francia. Hoy el proyecto continúa bajo la dirección de
+                                Virginie Joly.</p>
+                            <a href="#" class="producer-link">Explorar vinos</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Domaine aux Moines -->
+            <div class="producer-card-container">
+                <div class="producer-card-inner">
+                    <div class="producer-card-face producer-card-front">
+                        <div class="silhouette-wrapper">
+                            <img class="silhouette-img"
+                                src="productores/tessa-laroche-domaine-aux-moines-Illustracion.png"
+                                alt="Tessa Laroche - Domaine aux Moines">
+                        </div>
+                        <div class="front-label">
+                            <div class="producer-region"><span class="highlight">Savennières, Loire, Francia</span>
+                            </div>
+                            <h3><span class="highlight">Domaine aux Moines</span></h3>
+                        </div>
+                    </div>
+                    <div class="producer-card-face producer-card-back">
+                        <div class="producer-content">
+                            <div class="producer-region"><span class="highlight">Savennières, Loire, Francia</span>
+                            </div>
+                            <h3><span class="highlight">Domaine aux Moines</span></h3>
+                            <p>Propiedad histórica en Roche-aux-Moines, especializada en Chenin Blanc. Dirigido por
+                                Tessa Laroche, el enfoque privilegia la tensión, la claridad y la identidad del lugar.
+                            </p>
+                            <a href="#" class="producer-link">Explorar vinos</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chiara Condello -->
+            <div class="producer-card-container">
+                <div class="producer-card-inner">
+                    <div class="producer-card-face producer-card-front">
+                        <div class="silhouette-wrapper">
+                            <img class="silhouette-img" src="productores/Chiara-Condello-Illustracion.png"
+                                alt="Chiara Condello">
+                        </div>
+                        <div class="front-label">
+                            <div class="producer-region"><span class="highlight">Predappio, Emilia-Romagna,
+                                    Italia</span>
+                            </div>
+                            <h3><span class="highlight">Chiara Condello</span></h3>
+                        </div>
+                    </div>
+                    <div class="producer-card-face producer-card-back">
+                        <div class="producer-content">
+                            <div class="producer-region"><span class="highlight">Predappio, Emilia-Romagna,
+                                    Italia</span>
+                            </div>
+                            <h3><span class="highlight">Chiara Condello</span></h3>
+                            <p>Sangiovese de suelos de Spungone, formación calcárea de origen marino. Agricultura
+                                orgánica y vinificación cuidada para expresar con claridad el carácter del lugar.</p>
+                            <a href="#" class="producer-link">Explorar vinos</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wasenhaus -->
+            <div class="producer-card-container">
+                <div class="producer-card-inner">
+                    <div class="producer-card-face producer-card-front">
+                        <div class="silhouette-wrapper">
+                            <img class="silhouette-img" src="productores/wasenhaus alex-Illustracion.png"
+                                alt="Wasenhaus">
+                        </div>
+                        <div class="front-label">
+                            <div class="producer-region"><span class="highlight">Baden, Alemania</span></div>
+                            <h3><span class="highlight">Wasenhaus</span></h3>
+                        </div>
+                    </div>
+                    <div class="producer-card-face producer-card-back">
+                        <div class="producer-content">
+                            <div class="producer-region">Baden, Alemania</div>
+                            <h3>Wasenhaus</h3>
+                            <p>Fundado por Alexander Götze y Christoph Wolber, formados en Borgoña. Elaboran Pinot Noir,
+                                Chardonnay y Pinot Blanc de suelos calcáreos con mínima intervención.</p>
+                            <a href="#" class="producer-link">Explorar vinos</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contacto">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>pepichis</h3>
+                <p>Importamos vinos de productores que admiramos.<br>Vinos con identidad, origen y carácter.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Contacto</h4>
+                <ul>
+                    <li><a href="mailto:wines@pepichis.com">wines@pepichis.com</a></li>
+                    <li><a href="#">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Pepichis. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+
+
+        // ============================================
+        // HERO TYPEWRITER
+        // ============================================
+        function typeWriter() {
+            const h1 = document.getElementById('hero-typed');
+            const p = document.getElementById('hero-typed-p');
+            const copas = document.getElementById('hero-copas');
+
+            const h1Lines = [
+                'Importamos los vinos',
+                'que nos gusta tomar'
+            ];
+            const pText = 'Los que pediríamos si estuviéramos del otro lado de la carta.';
+
+            let lineIndex = 0;
+            let charIndex = 0;
+            let currentSpan = null;
+            const cursor = document.createElement('span');
+            cursor.className = 'typing-cursor';
+
+            function createSpan() {
+                currentSpan = document.createElement('span');
+                currentSpan.className = 'highlight';
+                h1.appendChild(currentSpan);
+                currentSpan.appendChild(cursor);
+            }
+
+            function typeH1() {
+                if (lineIndex >= h1Lines.length) {
+                    // Move cursor to p and start typing paragraph
+                    cursor.remove();
+                    p.appendChild(cursor);
+                    charIndex = 0;
+                    setTimeout(typeP, 200);
+                    return;
+                }
+
+                if (charIndex === 0) {
+                    if (lineIndex > 0) {
+                        h1.appendChild(document.createElement('br'));
+                    }
+                    createSpan();
+                }
+
+                const line = h1Lines[lineIndex];
+                if (charIndex < line.length) {
+                    currentSpan.insertBefore(document.createTextNode(line[charIndex]), cursor);
+                    charIndex++;
+                    setTimeout(typeH1, 35);
+                } else {
+                    lineIndex++;
+                    charIndex = 0;
+                    setTimeout(typeH1, 200);
+                }
+            }
+
+            function typeP() {
+                if (charIndex < pText.length) {
+                    p.insertBefore(document.createTextNode(pText[charIndex]), cursor);
+                    charIndex++;
+                    setTimeout(typeP, 25);
+                } else {
+                    cursor.remove();
+                    // Show copas after all typing is done
+                    gsap.to(copas, {
+                        opacity: 1,
+                        y: 0,
+                        rotation: 0,
+                        duration: 1.2,
+                        ease: 'power3.out'
+                    });
+                }
+            }
+
+            gsap.set(copas, { opacity: 0, y: 30, rotation: -3 });
+            setTimeout(typeH1, 400);
+        }
+
+        typeWriter();
+
+        // Mouse parallax on copas
+        const copas = document.getElementById('hero-copas');
+        document.querySelector('.hero').addEventListener('mousemove', (e) => {
+            const rect = e.currentTarget.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+            gsap.to(copas, {
+                x: x * 30,
+                y: y * 20,
+                rotation: x * 3,
+                duration: 0.6,
+                ease: 'power2.out'
+            });
+        });
+
+        document.querySelector('.hero').addEventListener('mouseleave', () => {
+            gsap.to(copas, {
+                x: 0,
+                y: 0,
+                rotation: 0,
+                duration: 0.8,
+                ease: 'elastic.out(1, 0.5)'
+            });
+        });
+
+        // ============================================
+        // BOTTLES SECTION — auto-triggered sequential reveal
+        // ============================================
+        ScrollTrigger.create({
+            trigger: '.bottles-sticky',
+            start: 'top 80%',
+            once: true,
+            onEnter: () => {
+                const allBottles = document.querySelectorAll('.bottle-item');
+                gsap.to(allBottles, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.6,
+                    stagger: 0.08,
+                    ease: 'power2.out'
+                });
+            }
+        });
+
+        // ============================================
+        // PRODUCERS GRID - FLIP CARDS
+        // ============================================
+        const producerCards = document.querySelectorAll('.producer-card-container');
+
+        // Scroll reveal animation
+        producerCards.forEach((container, index) => {
+            gsap.to(container, {
+                scrollTrigger: {
+                    trigger: container,
+                    start: 'top bottom-=80',
+                    end: 'top center+=50',
+                    scrub: 1
+                },
+                opacity: 1,
+                y: 0,
+                ease: 'power2.out'
+            });
+        });
+
+        // Flip cards: hover on desktop, scroll on mobile
+        function isMobile() { return window.innerWidth <= 1024; }
+        let scrollFlipTriggers = [];
+
+        function setupFlipBehavior() {
+            // Clear existing scroll triggers
+            scrollFlipTriggers.forEach(st => st.kill());
+            scrollFlipTriggers = [];
+            // Reset all cards
+            producerCards.forEach(c => c.classList.remove('flipped'));
+
+            if (isMobile()) {
+                // Mobile: scroll-triggered flip
+                producerCards.forEach(container => {
+                    const st = ScrollTrigger.create({
+                        trigger: container,
+                        start: '35% center',
+                        end: 'bottom top',
+                        onEnter: () => container.classList.add('flipped'),
+                        onLeaveBack: () => container.classList.remove('flipped'),
+                    });
+                    scrollFlipTriggers.push(st);
+                });
+            }
+        }
+
+        // Desktop: hover flip (always attached, only works when not mobile)
+        producerCards.forEach(container => {
+            container.addEventListener('mouseenter', () => {
+                if (!isMobile()) container.classList.add('flipped');
+            });
+            container.addEventListener('mouseleave', () => {
+                if (!isMobile()) container.classList.remove('flipped');
+            });
+        });
+
+        setupFlipBehavior();
+        window.addEventListener('resize', setupFlipBehavior);
+
+
+        // ============================================
+        // HEADER SHRINK ON SCROLL
+        // ============================================
+        const headerEl = document.querySelector('header');
+        let lastScrolled = false;
+
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY > 50;
+            if (scrolled !== lastScrolled) {
+                lastScrolled = scrolled;
+                if (scrolled) {
+                    headerEl.classList.add('header-scrolled');
+                } else {
+                    headerEl.classList.remove('header-scrolled');
+                }
+            }
+        }, { passive: true });
+
+        // ============================================
+        // SMOOTH SCROLL FOR LINKS
+        // ============================================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerOffset = 80;
+                    const top = target.getBoundingClientRect().top + window.scrollY - headerOffset;
+                    window.scrollTo({ top, behavior: 'smooth' });
+                }
+            });
+        });
+        // ============================================
+        // MOBILE HAMBURGER MENU
+        // ============================================
+        (function () {
+            const hamburger = document.getElementById('hamburgerBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+                document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+            });
+
+            document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+        })();
+    </script>
+</body>
+
+</html>

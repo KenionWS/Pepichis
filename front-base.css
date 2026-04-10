@@ -1,0 +1,248 @@
+@font-face {
+    font-family: "TAN-NIMBUS";
+    src: url("fonts/TAN-NIMBUS.woff2") format("woff2"), url("fonts/TAN-NIMBUS.woff") format("woff"), url("fonts/TAN-NIMBUS.ttf") format("truetype");
+    font-display: swap;
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "GabrielSans";
+    src: url("fonts/Gabriel-Sans-Font/Gabriel-Sans-Light.woff2") format("woff2"), url("fonts/Gabriel-Sans-Font/Gabriel-Sans-Light.otf") format("opentype");
+    font-weight: 300;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "GabrielSans";
+    src: url("fonts/Gabriel-Sans-Font/Gabriel-Sans-Normal.woff2") format("woff2"), url("fonts/Gabriel-Sans-Font/Gabriel-Sans-Normal.otf") format("opentype");
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "GabrielSans";
+    src: url("fonts/Gabriel-Sans-Font/Gabriel-Sans-Medium.woff2") format("woff2"), url("fonts/Gabriel-Sans-Font/Gabriel-Sans-Medium.otf") format("opentype");
+    font-weight: 500;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "GabrielSans";
+    src: url("fonts/Gabriel-Sans-Font/Gabriel-Sans-Bold.woff2") format("woff2"), url("fonts/Gabriel-Sans-Font/Gabriel-Sans-Bold.otf") format("opentype");
+    font-weight: 700;
+    font-display: swap;
+}
+
+:root {
+    --wine-deep: #f7f1ea;
+    --wine-red: #800020;
+    --accent-green: #c9dc6b;
+    --cream: #ede7df;
+    --charcoal: #484646;
+    --lavender: #c3c3ff;
+    --pink: #fdc9e4;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 20px;
+}
+body {
+    font-family: "GabrielSans", sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(72, 70, 70, 0.02) 2px, rgba(72, 70, 70, 0.02) 4px);
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.3;
+}
+
+a { text-decoration: none; }
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 1.5rem 4rem;
+    background: rgb(247 241 234 / 80%);
+    backdrop-filter: blur(5px);
+    border-bottom: 1px solid var(--lavender);
+    transition: padding 0.35s ease;
+}
+
+header.header-scrolled { padding: 0.6rem 4rem; }
+nav { display: flex; justify-content: space-between; align-items: center; }
+
+.logo {
+    font-family: "TAN-NIMBUS", serif;
+    font-size: 1.6rem;
+    color: var(--wine-red);
+    letter-spacing: 1px;
+    text-transform: lowercase;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    transition: font-size 0.35s ease, gap 0.35s ease;
+}
+
+header.header-scrolled .logo { font-size: 1.2rem; gap: 0.5rem; }
+.wine-glass-icon { width: 35px; height: 35px; object-fit: contain; transition: width 0.35s ease, height 0.35s ease; }
+header.header-scrolled .wine-glass-icon { width: 24px; height: 24px; }
+
+.nav-links { display: flex; gap: 3rem; list-style: none; transition: gap 0.35s ease; }
+header.header-scrolled .nav-links { gap: 2rem; }
+
+.nav-links a {
+    color: var(--charcoal);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    position: relative;
+    transition: all 0.35s ease;
+}
+
+header.header-scrolled .nav-links a { font-size: 0.8rem; }
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-green);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after { width: 100%; }
+.nav-links a:hover { color: var(--wine-red); }
+
+footer {
+    position: relative;
+    z-index: 2;
+    padding: 6rem 4rem 3rem;
+    background: var(--wine-deep);
+    border-top: 1px solid rgba(128, 0, 32, 0.1);
+}
+
+.footer-content {
+    max-width: 1600px;
+    margin: 0 auto 4rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 4rem;
+}
+
+.footer-brand h3 {
+    font-family: "TAN-NIMBUS", serif;
+    font-size: 2.5rem;
+    font-weight: normal;
+    color: #800020;
+    margin-bottom: 1rem;
+}
+
+.footer-brand p { font-size: 0.95rem; line-height: 1.7; opacity: 0.7; }
+.footer-links h4 { font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; }
+.footer-links ul { list-style: none; }
+.footer-links li { margin-bottom: 0.8rem; }
+.footer-links a { color: var(--charcoal); opacity: 0.7; transition: all 0.3s ease; }
+.footer-links a:hover { opacity: 1; color: var(--wine-red); }
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(128, 0, 32, 0.1);
+    opacity: 0.5;
+    font-size: 0.85rem;
+}
+
+.footer-credit {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: var(--charcoal);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.62rem;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+
+.footer-credit:hover {
+    opacity: 1;
+}
+
+.footer-credit img {
+    height: 14px;
+    width: auto;
+    object-fit: contain;
+    filter: grayscale(100%);
+}
+
+.hamburger-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    z-index: 1100;
+    position: relative;
+}
+
+.hamburger-btn span {
+    display: block;
+    width: 26px;
+    height: 2px;
+    background: var(--wine-red);
+    margin: 6px 0;
+    border-radius: 2px;
+    transition: transform 0.35s ease, opacity 0.25s ease;
+}
+
+.hamburger-btn.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.hamburger-btn.active span:nth-child(2) { opacity: 0; }
+.hamburger-btn.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 50vh;
+    background: rgb(247 241 234 / 95%);
+    backdrop-filter: blur(12px);
+    z-index: 1050;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.mobile-menu-overlay.active { opacity: 1; visibility: visible; }
+.mobile-nav-links { list-style: none; text-align: center; display: flex; flex-direction: column; gap: 2.5rem; }
+.mobile-nav-links a { color: var(--charcoal); font-size: 1.4rem; letter-spacing: 3px; text-transform: uppercase; transition: color 0.3s ease; }
+.mobile-nav-links a:hover { color: var(--wine-red); }
+
+@media (max-width: 1024px) {
+    footer { padding: 2rem; }
+    .footer-content { flex-direction: column; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; }
+    .nav-links { display: none; }
+    .hamburger-btn { display: block; }
+}
+
+@media (max-width: 600px) {
+    header { padding: 1rem 1.5rem; }
+}

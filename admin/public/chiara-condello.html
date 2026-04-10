@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chiara Condello — Pepichis</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <style>
+        /* FONT FACES */
+        @font-face {
+            font-family: 'TAN-NIMBUS';
+            src: url('fonts/TAN-NIMBUS.woff2') format('woff2'),
+                url('fonts/TAN-NIMBUS.woff') format('woff'),
+                url('fonts/TAN-NIMBUS.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'GabrielSans';
+            src: url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Normal.woff2') format('woff2'),
+                url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Normal.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'GabrielSans';
+            src: url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Light.woff2') format('woff2'),
+                url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Light.otf') format('opentype');
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'GabrielSans';
+            src: url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Medium.woff2') format('woff2'),
+                url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Medium.otf') format('opentype');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'GabrielSans';
+            src: url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Bold.woff2') format('woff2'),
+                url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Bold.otf') format('opentype');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        :root {
+            --wine-deep: #f7f1ea;
+            --wine-red: #800020;
+            --wine-light: #fdc9e4;
+            --accent-green: #c9dc6b;
+            --cream: #ede7df;
+            --charcoal: #484646;
+            --lavender: #c3c3ff;
+            --pink: #fdc9e4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'GabrielSans', sans-serif;
+            background: var(--wine-deep);
+            color: var(--charcoal);
+            overflow-x: hidden;
+        }
+
+
+
+        /* PAPER TEXTURE OVERLAY */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                repeating-linear-gradient(0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(72, 70, 70, 0.02) 2px,
+                    rgba(72, 70, 70, 0.02) 4px);
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.3;
+        }
+
+        /* HEADER */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.5rem 4rem;
+            background: rgb(247 241 234 / 80%);
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid var(--lavender);
+            transition: padding 0.35s ease;
+        }
+
+        header.header-scrolled {
+            padding: 0.6rem 4rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'TAN-NIMBUS', serif;
+            font-size: 1.6rem;
+            font-weight: normal;
+            color: var(--wine-red);
+            letter-spacing: 3px;
+            text-transform: lowercase;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+            transition: font-size 0.35s ease, gap 0.35s ease;
+        }
+
+        header.header-scrolled .logo {
+            font-size: 1.2rem;
+            gap: 0.5rem;
+        }
+
+        .wine-glass-icon {
+            width: 35px;
+            height: 35px;
+            object-fit: contain;
+            transition: width 0.35s ease, height 0.35s ease;
+        }
+
+        header.header-scrolled .wine-glass-icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+            transition: gap 0.35s ease;
+        }
+
+        header.header-scrolled .nav-links {
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--charcoal);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0px;
+            text-transform: uppercase;
+            position: relative;
+            transition: all 0.35s ease;
+        }
+
+        header.header-scrolled .nav-links a {
+            font-size: 0.8rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--wine-red);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* ============================================ */
+        /* PRODUCER HERO SECTION — LIGHT THEME */
+        /* ============================================ */
+        .producer-hero {
+            min-height: 100vh;
+            background: var(--wine-deep);
+            display: flex;
+            align-items: stretch;
+            padding-top: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative bordeaux border accents */
+
+        .producer-hero-inner {
+            display: flex;
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 4rem 6rem;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        /* Left: Photo */
+        .producer-photo-side {
+            flex: 1;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .producer-photo-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .producer-photo-main {
+            width: 100%;
+            border-radius: 16px;
+            object-fit: cover;
+            aspect-ratio: 4 / 4;
+            display: block;
+        }
+
+        .producer-illustration {
+            position: absolute;
+            bottom: 40px;
+            right: 0;
+            width: 150px;
+            filter: drop-shadow(0 10px 30px rgba(128, 0, 32, 0.15));
+            opacity: 0.5;
+            z-index: 2;
+        }
+
+        /* Right: Info */
+        .producer-info-side {
+            flex: 1;
+            color: var(--charcoal);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .breadcrumb {
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.5;
+            margin-bottom: 1.5rem;
+        }
+
+        .breadcrumb a {
+            color: var(--charcoal);
+            text-decoration: none;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            opacity: 1;
+            color: var(--wine-red);
+        }
+
+        .producer-region-tag {
+            display: inline-block;
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--wine-red);
+            border: 1px solid rgba(128, 0, 32, 0.3);
+            padding: 0.4rem 1.2rem;
+            border-radius: 100px;
+            margin-bottom: 1.5rem;
+        }
+
+        .producer-name {
+            font-family: 'TAN-NIMBUS', serif;
+            font-size: 4rem;
+            font-weight: normal;
+            font-style: italic;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            color: var(--wine-red);
+            text-transform: lowercase;
+        }
+
+        .producer-description {
+            font-size: 0.95rem;
+            line-height: 1.85;
+            opacity: 0.8;
+            margin-bottom: 2.5rem;
+            max-width: 520px;
+        }
+
+        .producer-meta {
+            display: flex;
+            gap: 3rem;
+            margin-top: 1rem;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .meta-label {
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.4;
+        }
+
+        .meta-value {
+            font-family: 'TAN-NIMBUS', serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--wine-red);
+            text-transform: lowercase;
+        }
+
+        /* ============================================ */
+        /* WINES SECTION — SCATTERED / DISORDERED LAYOUT */
+        /* ============================================ */
+        .wines-section {
+            padding: 5rem 4rem 6rem;
+            background: var(--wine-deep);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* COLOR MANCHAS (paint splashes) */
+        .mancha {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.35;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .mancha-green-1 {
+            width: 200px;
+            height: 350px;
+            background: var(--accent-green);
+            top: 10%;
+            left: -60px;
+            transform: rotate(-15deg);
+            border-radius: 45% 55% 60% 40% / 50% 45% 55% 50%;
+        }
+
+        .mancha-green-2 {
+            width: 200px;
+            height: 250px;
+            background: var(--accent-green);
+            bottom: 5%;
+            left: -30px;
+            border-radius: 55% 45% 50% 50% / 40% 60% 40% 60%;
+        }
+
+        .mancha-lavender-1 {
+            width: 240px;
+            height: 280px;
+            background: var(--lavender);
+            top: 20%;
+            right: -50px;
+            border-radius: 50% 50% 45% 55% / 55% 45% 55% 45%;
+        }
+
+        .mancha-pink-1 {
+            width: 260px;
+            height: 220px;
+            background: var(--pink);
+            bottom: 15%;
+            right: -40px;
+            border-radius: 40% 60% 55% 45% / 50% 50% 50% 50%;
+        }
+
+        .mancha-green-3 {
+            width: 180px;
+            height: 180px;
+            background: var(--accent-green);
+            top: 55%;
+            left: 10%;
+            opacity: 0.2;
+            border-radius: 60% 40% 50% 50% / 45% 55% 45% 55%;
+        }
+
+        .mancha-lavender-2 {
+            width: 150px;
+            height: 190px;
+            background: var(--lavender);
+            bottom: 30%;
+            left: 15%;
+            opacity: 0.2;
+            border-radius: 50% 50% 40% 60% / 55% 45% 55% 45%;
+        }
+
+        .wines-header {
+            max-width: 1600px;
+            margin: 0 auto 4rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .wines-title {
+            font-family: 'TAN-NIMBUS', serif;
+            font-size: 2.5rem;
+            font-weight: normal;
+            font-style: italic;
+            color: var(--charcoal);
+            text-transform: lowercase;
+            letter-spacing: 2px;
+        }
+
+        /* Wines container — inline flexbox row */
+        .wines-scattered {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 2.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            z-index: 1;
+            position: relative;
+            flex-wrap: nowrap;
+        }
+
+        /* Individual wine item — inline with stagger */
+        .wine-scattered-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.4s ease;
+            opacity: 0;
+            transform: translateY(40px);
+            flex: 1;
+            min-width: 0;
+            width: 220px;
+        }
+
+        /* Odd items (1st, 3rd, 5th) pushed down */
+        .wine-scattered-item:nth-child(odd) {
+            margin-top: 80px;
+        }
+
+        /* Even items (2nd, 4th) stay at the top */
+        .wine-scattered-item:nth-child(even) {
+            margin-top: 0;
+        }
+
+        .wine-scattered-item:hover {
+            transform: translateY(-10px) !important;
+        }
+
+        .wine-scattered-item:hover .scattered-bottle img {
+            transform: scale(1.05);
+        }
+
+        .scattered-bottle {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .scattered-bottle img {
+            height: 280px;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.12));
+            transition: transform 0.5s ease;
+        }
+
+        /* Different bottle sizes for variety */
+        .wine-scattered-item.size-small .scattered-bottle img {
+            max-height: 240px;
+        }
+
+        .wine-scattered-item.size-large .scattered-bottle img {
+            max-height: 300px;
+        }
+
+        .wine-scattered-item.size-magnum .scattered-bottle img {
+            max-height: 270px;
+        }
+
+        .scattered-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.2rem;
+        }
+
+        .scattered-label .wine-name {
+            font-family: 'GabrielSans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--charcoal);
+            line-height: 1.3;
+        }
+
+        .scattered-label .wine-year {
+            font-family: 'GabrielSans', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--charcoal);
+            opacity: 0.8;
+        }
+
+        .scattered-label .wine-price {
+            font-family: 'GabrielSans', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--wine-red);
+            margin-top: 0.2rem;
+        }
+
+        .scattered-label .wine-size-tag {
+            font-family: 'GabrielSans', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--wine-red);
+            font-style: italic;
+        }
+
+        .wines-footnote {
+            text-align: center;
+            margin-top: 4rem;
+            font-size: 0.75rem;
+            color: var(--charcoal);
+            opacity: 0.5;
+            position: relative;
+            z-index: 1;
+            font-style: italic;
+        }
+
+        /* Decorative border corners for wines section */
+        .corner-decoration {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border-color: var(--wine-red);
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.3;
+        }
+
+        .corner-tl {
+            top: 20px;
+            left: 20px;
+            border-top: 2px solid;
+            border-left: 2px solid;
+        }
+
+        .corner-tr {
+            top: 20px;
+            right: 20px;
+            border-top: 2px solid;
+            border-right: 2px solid;
+        }
+
+        .corner-bl {
+            bottom: 20px;
+            left: 20px;
+            border-bottom: 2px solid;
+            border-left: 2px solid;
+        }
+
+        .corner-br {
+            bottom: 20px;
+            right: 20px;
+            border-bottom: 2px solid;
+            border-right: 2px solid;
+        }
+
+        /* ============================================ */
+        /* FOOTER */
+        /* ============================================ */
+        footer {
+            padding: 6rem 4rem 3rem;
+            background: var(--wine-deep);
+            border-top: 1px solid rgba(128, 0, 32, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand h3 {
+            font-family: 'TAN-NIMBUS', serif;
+            font-size: 2.5rem;
+            font-weight: normal;
+            margin-bottom: 1rem;
+            color: #800020;
+        }
+
+        .footer-brand p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            opacity: 0.7;
+        }
+
+        .footer-links h4 {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            color: var(--charcoal);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--charcoal);
+            text-decoration: none;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--wine-red);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(128, 0, 32, 0.1);
+            opacity: 0.5;
+            font-size: 0.85rem;
+        }
+
+        /* HAMBURGER BUTTON */
+        .hamburger-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 6px;
+            z-index: 1100;
+            position: relative;
+        }
+
+        .hamburger-btn span {
+            display: block;
+            width: 26px;
+            height: 2px;
+            background: var(--wine-red);
+            margin: 6px 0;
+            border-radius: 2px;
+            transition: transform 0.35s ease, opacity 0.25s ease;
+        }
+
+        .hamburger-btn.active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .hamburger-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-btn.active span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        /* MOBILE MENU OVERLAY */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 50vh;
+            background: rgb(247 241 234 / 95%);
+            backdrop-filter: blur(12px);
+            z-index: 1050;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .mobile-nav-links a {
+            color: var(--charcoal);
+            text-decoration: none;
+            font-size: 1.4rem;
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav-links a:hover {
+            color: var(--wine-red);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .producer-hero-inner {
+                flex-direction: column;
+                padding: 3rem 2rem;
+                gap: 3rem;
+            }
+
+            .producer-name {
+                font-size: 2.8rem;
+            }
+
+            .producer-illustration {
+                width: 140px;
+                bottom: -20px;
+                right: -20px;
+            }
+
+            .wines-section {
+                padding: 4rem 2rem;
+            }
+
+            /* Tablet: wrap into rows */
+            .wines-scattered {
+                flex-wrap: wrap;
+                gap: 2rem 1.5rem;
+            }
+
+            .wine-scattered-item {
+                max-width: calc(33% - 1rem);
+            }
+
+            .wine-scattered-item:nth-child(odd) {
+                margin-top: 50px;
+            }
+
+            footer {
+                padding: 2rem;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+
+            .producer-photo-side {
+                z-index: 2;
+            }
+
+            .producer-info-side {
+                width: 100%;
+            }
+
+            .producer-illustration {
+                display: none;
+            }
+
+            .producer-meta {
+                flex-wrap: wrap;
+                position: relative;
+                z-index: 2;
+            }
+
+            .wines-title {
+                font-size: 1.5rem;
+            }
+
+            .producer-region-tag {
+                letter-spacing: 1px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger-btn {
+                display: block;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 1rem 1.5rem;
+            }
+
+            .producer-hero-inner {
+                padding: 2rem 1.5rem;
+            }
+
+            .producer-name {
+                font-size: 2.2rem;
+            }
+
+            /* Mobile slider for wines */
+            .wines-scattered {
+                display: flex;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                gap: 0;
+                padding: 0 1rem;
+                scroll-behavior: smooth;
+                scrollbar-width: none;
+                /* Firefox */
+            }
+
+            .wines-scattered::-webkit-scrollbar {
+                display: none;
+                /* Chrome/Safari */
+            }
+
+            .wine-scattered-item {
+                flex: 0 0 calc(50% - 0.5rem);
+                max-width: calc(50% - 0.5rem);
+                scroll-snap-align: start;
+                margin-right: 1rem;
+            }
+
+            /* Remove stagger in mobile slider */
+            .wine-scattered-item:nth-child(odd) {
+                margin-top: 0;
+            }
+
+            .wine-scattered-item:nth-child(even) {
+                margin-top: 0;
+            }
+
+            /* Every pair snaps together */
+            .wine-scattered-item:nth-child(odd) {
+                scroll-snap-align: start;
+            }
+
+            .wine-scattered-item:nth-child(even) {
+                scroll-snap-align: none;
+            }
+
+            .scattered-bottle img {
+                height: 220px;
+            }
+
+            .wine-scattered-item.size-small .scattered-bottle img,
+            .wine-scattered-item.size-large .scattered-bottle img,
+            .wine-scattered-item.size-magnum .scattered-bottle img {
+                max-height: 220px;
+            }
+
+            /* Slider navigation dots */
+            .wines-slider-dots {
+                display: flex;
+                justify-content: center;
+                gap: 0.5rem;
+                margin-top: 2rem;
+                position: relative;
+                z-index: 1;
+            }
+
+            .wines-slider-dot {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background: var(--charcoal);
+                opacity: 0.2;
+                border: none;
+                padding: 0;
+                cursor: pointer;
+                transition: opacity 0.3s ease, transform 0.3s ease;
+            }
+
+            .wines-slider-dot.active {
+                opacity: 0.7;
+                transform: scale(1.3);
+                background: var(--wine-red);
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <nav>
+            <a href="pepichis-v2-dark_5b.html" class="logo">
+                <img class="wine-glass-icon" src="pepichis_logo.png" alt="Pepichis">
+                pepichis
+            </a>
+            <ul class="nav-links">
+                <li><a href="pepichis-v2-dark_5b.html#historia">Historia</a></li>
+                <li><a href="pepichis-v2-dark_5b.html#productores">Productores</a></li>
+                <li><a href="pepichis-v2-dark_5b.html#seleccion">Selección</a></li>
+                <li><a href="pepichis-v2-dark_5b.html#contacto">Contacto</a></li>
+            </ul>
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="Abrir menú">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+        <!-- Mobile menu overlay -->
+        <div class="mobile-menu-overlay" id="mobileMenu">
+            <ul class="mobile-nav-links">
+                <li><a href="pepichis-v2-dark_5b.html#historia">Historia</a></li>
+                <li><a href="pepichis-v2-dark_5b.html#productores">Productores</a></li>
+                <li><a href="pepichis-v2-dark_5b.html#seleccion">Selección</a></li>
+                <li><a href="pepichis-v2-dark_5b.html#contacto">Contacto</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- PRODUCER HERO -->
+    <section class="producer-hero">
+        <div class="producer-hero-inner">
+            <!-- Photo Side -->
+            <div class="producer-photo-side">
+                <div class="producer-photo-wrapper">
+                    <img class="producer-photo-main" src="productores/Chiara-Condello-Illustracion.png"
+                        alt="Chiara Condello en su viñedo">
+                </div>
+            </div>
+
+            <!-- Info Side -->
+            <div class="producer-info-side">
+                <div class="breadcrumb">
+                    <a href="pepichis-v2-dark_5b.html">Inicio</a> &nbsp;/&nbsp;
+                    <a href="pepichis-v2-dark_5b.html#productores">Productores</a> &nbsp;/&nbsp;
+                    Chiara Condello
+                </div>
+                <div class="producer-region-tag">Predappio, Emilia-Romagna, Italia</div>
+                <h1 class="producer-name">Chiara Condello</h1>
+                <p class="producer-description">
+                    Sangiovese de suelos de Spungone, una formación calcárea de origen marino que le da al vino
+                    una identidad singular. Chiara trabaja con agricultura orgánica y una vinificación cuidada,
+                    buscando expresar con claridad el carácter de Predappio.
+                    <br><br>
+                    Sus vinos capturan la esencia de un terruño único: la tensión mineral del Spungone,
+                    la frescura de la altitud y la expresión franca del Sangiovese sin artificios.
+                </p>
+                <div class="producer-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Productora</span>
+                        <span class="meta-value">Chiara Condello</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Región</span>
+                        <span class="meta-value">Emilia-Romagna</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">País</span>
+                        <span class="meta-value">Italia</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mancha mancha-green-1"></div>
+        <div class="mancha mancha-green-2"></div>
+    </section>
+
+    <!-- WINES SECTION with scattered layout and manchas -->
+    <section class="wines-section">
+
+        <!-- Color manchas (paint splashes) -->
+        <div class="mancha mancha-lavender-1"></div>
+        <div class="mancha mancha-pink-1"></div>
+        <div class="mancha mancha-green-3"></div>
+        <div class="mancha mancha-lavender-2"></div>
+
+        <div class="wines-header">
+            <h2 class="wines-title">Nuestra Selección de la Bodega</h2>
+        </div>
+
+        <div class="wines-scattered">
+            <!-- Wine 1: Predappio -->
+            <div class="wine-scattered-item size-small">
+                <div class="scattered-bottle">
+                    <img src="vinos/Chiara-condello-Predappio.png" alt="Predappio 2022">
+                </div>
+                <div class="scattered-label">
+                    <span class="wine-name">Predappio</span>
+                    <span class="wine-year">2022</span>
+                </div>
+            </div>
+
+            <!-- Wine 2: Le Lucciole -->
+            <div class="wine-scattered-item size-large">
+                <div class="scattered-bottle">
+                    <img src="vinos/Chiara-Condello-Le-Lucciole.png" alt="Le Lucciole 2021">
+                </div>
+                <div class="scattered-label">
+                    <span class="wine-name">Le Lucciole</span>
+                    <span class="wine-year">2021</span>
+                </div>
+            </div>
+
+            <!-- Wine 3: Lo Starlisco -->
+            <div class="wine-scattered-item">
+                <div class="scattered-bottle">
+                    <img src="vinos/Chiara-Condello-Lo-Starlisco.png" alt="Lo Starlisco 2020">
+                </div>
+                <div class="scattered-label">
+                    <span class="wine-name">Lo Starlisco</span>
+                    <span class="wine-year">2020</span>
+                </div>
+            </div>
+
+            <!-- Wine 4: Predappio Magnum -->
+            <div class="wine-scattered-item size-magnum">
+                <div class="scattered-bottle">
+                    <img src="vinos/Chiara-condello-Predappio.png" alt="Predappio 2022 Magnum">
+                </div>
+                <div class="scattered-label">
+                    <span class="wine-name">Predappio</span>
+                    <span class="wine-year">2022</span>
+                    <span class="wine-size-tag">Magnum</span>
+                </div>
+            </div>
+
+            <!-- Wine 5: Le Lucciole Magnum -->
+            <div class="wine-scattered-item size-large">
+                <div class="scattered-bottle">
+                    <img src="vinos/Chiara-Condello-Le-Lucciole.png" alt="Le Lucciole 2021 Magnum">
+                </div>
+                <div class="scattered-label">
+                    <span class="wine-name">Le Lucciole</span>
+                    <span class="wine-year">2021</span>
+                    <span class="wine-size-tag">Magnum</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slider dots (mobile only, inserted by JS) -->
+        <div class="wines-slider-dots" id="winesSliderDots"></div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>pepichis</h3>
+                <p>Importamos vinos de productores que admiramos.<br>Vinos con identidad, origen y carácter.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Contacto</h4>
+                <ul>
+                    <li><a href="mailto:wines@pepichis.com">wines@pepichis.com</a></li>
+                    <li><a href="#">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Pepichis. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+
+
+        // ============================================
+        // HERO ANIMATIONS
+        // ============================================
+        const heroElements = document.querySelectorAll('.producer-photo-wrapper, .breadcrumb, .producer-region-tag, .producer-name, .producer-description, .producer-meta');
+        heroElements.forEach((el, i) => {
+            gsap.from(el, {
+                opacity: 0,
+                y: 40,
+                duration: 1,
+                delay: 0.2 + i * 0.15,
+                ease: 'power3.out'
+            });
+        });
+
+        // Photo parallax
+        const photoWrapper = document.querySelector('.producer-photo-wrapper');
+        document.querySelector('.producer-hero').addEventListener('mousemove', (e) => {
+            const rect = e.currentTarget.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+            gsap.to(photoWrapper, {
+                x: x * 15,
+                y: y * 10,
+                duration: 0.6,
+                ease: 'power2.out'
+            });
+        });
+
+        document.querySelector('.producer-hero').addEventListener('mouseleave', () => {
+            gsap.to(photoWrapper, {
+                x: 0,
+                y: 0,
+                duration: 0.8,
+                ease: 'elastic.out(1, 0.5)'
+            });
+        });
+
+        // ============================================
+        // WINES SECTION — Scattered entrance
+        // ============================================
+        const wineItems = document.querySelectorAll('.wine-scattered-item');
+        wineItems.forEach((item, i) => {
+            gsap.to(item, {
+                scrollTrigger: {
+                    trigger: '.wines-section',
+                    start: 'top center+=100',
+                    end: 'top center-=100',
+                    scrub: false,
+                    toggleActions: 'play none none reverse'
+                },
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                delay: i * 0.15,
+                ease: 'power3.out'
+            });
+        });
+
+        // Manchas subtle animation
+        const manchas = document.querySelectorAll('.mancha');
+        manchas.forEach((mancha, i) => {
+            gsap.to(mancha, {
+                scrollTrigger: {
+                    trigger: '.wines-section',
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: 1
+                },
+                y: (i % 2 === 0) ? -40 : 40,
+                x: (i % 3 === 0) ? 20 : -20,
+                scale: 1 + (i * 0.03),
+                ease: 'none'
+            });
+        });
+
+        // ============================================
+        // HEADER SHRINK ON SCROLL
+        // ============================================
+        const headerEl = document.querySelector('header');
+        let lastScrolled = false;
+
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY > 50;
+            if (scrolled !== lastScrolled) {
+                lastScrolled = scrolled;
+                if (scrolled) {
+                    headerEl.classList.add('header-scrolled');
+                } else {
+                    headerEl.classList.remove('header-scrolled');
+                }
+            }
+        }, { passive: true });
+
+        // ============================================
+        // MOBILE WINE SLIDER — dots & scroll sync
+        // ============================================
+        (function () {
+            const scattered = document.querySelector('.wines-scattered');
+            const dotsContainer = document.getElementById('winesSliderDots');
+            const items = document.querySelectorAll('.wine-scattered-item');
+            const totalSlides = Math.ceil(items.length / 2);
+
+            function isMobile() {
+                return window.innerWidth <= 600;
+            }
+
+            function buildDots() {
+                dotsContainer.innerHTML = '';
+                for (let i = 0; i < totalSlides; i++) {
+                    const dot = document.createElement('button');
+                    dot.className = 'wines-slider-dot' + (i === 0 ? ' active' : '');
+                    dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+                    dot.addEventListener('click', () => {
+                        const itemWidth = items[0].offsetWidth + 16; // width + margin
+                        scattered.scrollTo({ left: i * itemWidth * 2, behavior: 'smooth' });
+                    });
+                    dotsContainer.appendChild(dot);
+                }
+            }
+
+            function updateDots() {
+                if (!isMobile()) return;
+                const itemWidth = items[0].offsetWidth + 16;
+                const scrollPos = scattered.scrollLeft;
+                const activeIndex = Math.round(scrollPos / (itemWidth * 2));
+                dotsContainer.querySelectorAll('.wines-slider-dot').forEach((dot, i) => {
+                    dot.classList.toggle('active', i === activeIndex);
+                });
+            }
+
+            if (isMobile()) buildDots();
+
+            scattered.addEventListener('scroll', updateDots, { passive: true });
+
+            window.addEventListener('resize', () => {
+                if (isMobile()) {
+                    if (dotsContainer.children.length === 0) buildDots();
+                } else {
+                    dotsContainer.innerHTML = '';
+                }
+            });
+        })();
+        // ============================================
+        // MOBILE HAMBURGER MENU
+        // ============================================
+        (function () {
+            const hamburger = document.getElementById('hamburgerBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+                document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+            });
+
+            document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+        })();
+    </script>
+</body>
+
+</html>

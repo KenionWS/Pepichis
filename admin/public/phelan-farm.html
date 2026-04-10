@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phelan Farm — Pepichis</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <style>
+        /* FONT FACES */
+        @font-face {
+            font-family: 'TAN-NIMBUS';
+            src: url('fonts/TAN-NIMBUS.woff2') format('woff2'),
+                url('fonts/TAN-NIMBUS.woff') format('woff'),
+                url('fonts/TAN-NIMBUS.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'GabrielSans';
+            src: url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Normal.woff2') format('woff2'),
+                url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Normal.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'GabrielSans';
+            src: url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Light.woff2') format('woff2'),
+                url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Light.otf') format('opentype');
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'GabrielSans';
+            src: url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Medium.woff2') format('woff2'),
+                url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Medium.otf') format('opentype');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'GabrielSans';
+            src: url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Bold.woff2') format('woff2'),
+                url('fonts/Gabriel-Sans-Font/Gabriel-Sans-Bold.otf') format('opentype');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        :root {
+            --wine-deep: #f7f1ea;
+            --wine-red: #800020;
+            --wine-light: #fdc9e4;
+            --accent-green: #c9dc6b;
+            --cream: #ede7df;
+            --charcoal: #484646;
+            --lavender: #c3c3ff;
+            --pink: #fdc9e4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'GabrielSans', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            overflow-x: hidden;
+        }
+
+
+
+        /* PAPER TEXTURE OVERLAY */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                repeating-linear-gradient(0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(72, 70, 70, 0.02) 2px,
+                    rgba(72, 70, 70, 0.02) 4px);
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.3;
+        }
+
+        /* HEADER */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.5rem 4rem;
+            background: rgb(247 241 234 / 80%);
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid var(--lavender);
+            transition: padding 0.35s ease;
+        }
+
+        header.header-scrolled {
+            padding: 0.6rem 4rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'TAN-NIMBUS', serif;
+            font-size: 1.6rem;
+            font-weight: normal;
+            color: var(--wine-red);
+            letter-spacing: 3px;
+            text-transform: lowercase;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+            transition: font-size 0.35s ease, gap 0.35s ease;
+        }
+
+        header.header-scrolled .logo {
+            font-size: 1.2rem;
+            gap: 0.5rem;
+        }
+
+        .wine-glass-icon {
+            width: 35px;
+            height: 35px;
+            object-fit: contain;
+            transition: width 0.35s ease, height 0.35s ease;
+        }
+
+        header.header-scrolled .wine-glass-icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+            transition: gap 0.35s ease;
+        }
+
+        header.header-scrolled .nav-links {
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--charcoal);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0px;
+            text-transform: uppercase;
+            position: relative;
+            transition: all 0.35s ease;
+        }
+
+        header.header-scrolled .nav-links a {
+            font-size: 0.8rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--wine-red);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* ============================================ */
+        /* PRODUCER HERO SECTION */
+        /* ============================================ */
+        .producer-hero {
+            min-height: 100vh;
+            background: var(--wine-deep);
+            display: flex;
+            align-items: stretch;
+            padding-top: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .producer-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at 30% 50%, rgba(0, 0, 0, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .producer-hero-inner {
+            display: flex;
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 4rem 6rem;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        /* Left: Photo */
+        .producer-photo-side {
+            flex: 1;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .producer-photo-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .producer-photo-main {
+            width: 100%;
+            border-radius: 16px;
+            object-fit: cover;
+            aspect-ratio: 3 / 4;
+            display: block;
+            /*box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);*/
+        }
+
+        .producer-illustration {
+            position: absolute;
+            bottom: -30px;
+            right: -40px;
+            width: 220px;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+            opacity: 0.9;
+            z-index: 2;
+        }
+
+        /* Right: Info */
+        .producer-info-side {
+            flex: 1;
+            color: var(--charcoal);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .breadcrumb {
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.5;
+            margin-bottom: 1.5rem;
+        }
+
+        .breadcrumb a {
+            color: var(--charcoal);
+            text-decoration: none;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            opacity: 1;
+            color: var(--wine-red);
+        }
+
+        .producer-region-tag {
+            display: inline-block;
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--wine-red);
+            border: 1px solid rgba(128, 0, 32, 0.3);
+            padding: 0.4rem 1.2rem;
+            border-radius: 100px;
+            margin-bottom: 1.5rem;
+        }
+
+        .producer-name {
+            font-family: 'TAN-NIMBUS', serif;
+            font-size: 4rem;
+            font-weight: normal;
+            font-style: italic;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            color: var(--wine-red);
+            text-transform: lowercase;
+        }
+
+        .producer-description {
+            font-size: 0.95rem;
+            line-height: 1.85;
+            opacity: 0.8;
+            margin-bottom: 2.5rem;
+            max-width: 520px;
+        }
+
+        .producer-meta {
+            display: flex;
+            gap: 3rem;
+            margin-top: 1rem;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .meta-label {
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.4;
+        }
+
+        .meta-value {
+            font-family: 'TAN-NIMBUS', serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--wine-red);
+            text-transform: lowercase;
+        }
+
+        /* ============================================ */
+        /* WINES SECTION */
+        /* ============================================ */
+        .wines-section {
+            padding: 6rem 6rem;
+            background: var(--wine-deep);
+        }
+
+        .wines-header {
+            max-width: 1600px;
+            margin: 0 auto 4rem;
+        }
+
+        .wines-section-label {
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--wine-red);
+            margin-bottom: 1rem;
+            opacity: 0.7;
+        }
+
+        .wines-title {
+            font-family: 'TAN-NIMBUS', serif;
+            font-size: 2.5rem;
+            font-weight: normal;
+            font-style: italic;
+            color: var(--charcoal);
+            text-transform: lowercase;
+        }
+
+        .wines-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2.5rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .wine-bottle-card {
+            background: transparent;
+            border-radius: 16px;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            opacity: 0;
+            transform: translateY(40px);
+            cursor: pointer;
+        }
+
+        .wine-bottle-card:nth-child(even) {
+            margin-top: 75px;
+        }
+
+        .wine-bottle-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .bottle-img-wrapper {
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .bottle-img-wrapper::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 20px;
+            background: radial-gradient(ellipse, rgba(128, 0, 32, 0.08), transparent);
+            border-radius: 50%;
+        }
+
+        .bottle-img-wrapper img {
+            max-height: 280px;
+            max-width: 100%;
+            object-fit: contain;
+            transition: transform 0.5s ease;
+        }
+
+        .wine-bottle-card:hover .bottle-img-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .wine-name {
+            font-family: 'TAN-NIMBUS', serif;
+            font-size: 1.15rem;
+            font-weight: normal;
+            font-style: italic;
+            color: var(--charcoal);
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+            text-transform: lowercase;
+        }
+
+        .wine-type {
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--wine-red);
+            opacity: 0.7;
+            margin-bottom: 0.8rem;
+        }
+
+        .wine-desc {
+            font-size: 0.82rem;
+            line-height: 1.6;
+            opacity: 0.65;
+        }
+
+        /* ============================================ */
+        /* FOOTER */
+        /* ============================================ */
+        footer {
+            padding: 6rem 4rem 3rem;
+            background: var(--wine-deep);
+            border-top: 1px solid rgba(128, 0, 32, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand h3 {
+            font-family: 'TAN-NIMBUS', serif;
+            font-size: 2.5rem;
+            font-weight: normal;
+            margin-bottom: 1rem;
+            color: #800020;
+        }
+
+        .footer-brand p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            opacity: 0.7;
+        }
+
+        .footer-links h4 {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            color: var(--charcoal);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--charcoal);
+            text-decoration: none;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--wine-red);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(128, 0, 32, 0.1);
+            opacity: 0.5;
+            font-size: 0.85rem;
+        }
+
+        /* HAMBURGER BUTTON */
+        .hamburger-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 6px;
+            z-index: 1100;
+            position: relative;
+        }
+
+        .hamburger-btn span {
+            display: block;
+            width: 26px;
+            height: 2px;
+            background: var(--wine-red);
+            margin: 6px 0;
+            border-radius: 2px;
+            transition: transform 0.35s ease, opacity 0.25s ease;
+        }
+
+        .hamburger-btn.active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .hamburger-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-btn.active span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        /* MOBILE MENU OVERLAY */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 50vh;
+            background: rgb(247 241 234 / 95%);
+            backdrop-filter: blur(12px);
+            z-index: 1050;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .mobile-nav-links a {
+            color: var(--charcoal);
+            text-decoration: none;
+            font-size: 1.4rem;
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav-links a:hover {
+            color: var(--wine-red);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .producer-hero-inner {
+                flex-direction: column;
+                padding: 3rem 2rem;
+                gap: 3rem;
+            }
+
+            .producer-name {
+                font-size: 2.8rem;
+            }
+
+            .producer-illustration {
+                width: 140px;
+                bottom: -20px;
+                right: -20px;
+            }
+
+            .wines-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .wines-section {
+                padding: 4rem 2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger-btn {
+                display: block;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 1rem 1.5rem;
+            }
+
+            .producer-hero-inner {
+                padding: 2rem 1.5rem;
+            }
+
+            .producer-name {
+                font-size: 2.2rem;
+            }
+
+            .wines-grid {
+                grid-template-columns: 1fr;
+            }
+
+            footer {
+                padding: 2rem;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <nav>
+            <a href="pepichis-v2-dark_5.html" class="logo">
+                <img class="wine-glass-icon" src="pepichis_logo.png" alt="Pepichis">
+                pepichis
+            </a>
+            <ul class="nav-links">
+                <li><a href="pepichis-v2-dark_5.html#historia">Historia</a></li>
+                <li><a href="pepichis-v2-dark_5.html#productores">Productores</a></li>
+                <li><a href="pepichis-v2-dark_5.html#seleccion">Selección</a></li>
+                <li><a href="pepichis-v2-dark_5.html#contacto">Contacto</a></li>
+            </ul>
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="Abrir menú">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+        <!-- Mobile menu overlay -->
+        <div class="mobile-menu-overlay" id="mobileMenu">
+            <ul class="mobile-nav-links">
+                <li><a href="pepichis-v2-dark_5.html#historia">Historia</a></li>
+                <li><a href="pepichis-v2-dark_5.html#productores">Productores</a></li>
+                <li><a href="pepichis-v2-dark_5.html#seleccion">Selección</a></li>
+                <li><a href="pepichis-v2-dark_5.html#contacto">Contacto</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- PRODUCER HERO -->
+    <section class="producer-hero">
+        <div class="producer-hero-inner">
+            <!-- Photo Side -->
+            <div class="producer-photo-side">
+                <div class="producer-photo-wrapper">
+                    <img class="producer-photo-main" src="productores/Rajat-Parr-Phelan-Farm-2-Illustracion.png"
+                        alt="Rajat Parr en el viñedo de Phelan Farm">
+                </div>
+            </div>
+
+            <!-- Info Side -->
+            <div class="producer-info-side">
+                <div class="breadcrumb">
+                    <a href="pepichis-v2-dark_5.html">Inicio</a> &nbsp;/&nbsp;
+                    <a href="pepichis-v2-dark_5.html#productores">Productores</a> &nbsp;/&nbsp;
+                    Phelan Farm
+                </div>
+                <div class="producer-region-tag">Cambria, San Luis Obispo Coast, California, EEUU</div>
+                <h1 class="producer-name">Phelan Farm</h1>
+                <p class="producer-description">
+                    Phelan Farm está ubicada en Cambria, en la costa de San Luis Obispo, California, en un entorno
+                    profundamente marcado por la influencia directa del Océano Pacífico. En este extremo del continente,
+                    el clima fresco, los vientos marinos y la cercanía al océano definen tanto el carácter del viñedo
+                    como la filosofía del proyecto.
+                    <br><br>
+                    El trabajo se apoya en una agricultura cuidadosa y respetuosa del entorno, junto con una
+                    vinificación simple y precisa, orientada a expresar la diversidad de suelos y microclimas.
+                    El proyecto vitivinícola está liderado por Rajat Parr, uno de los sommeliers más influyentes de
+                    Estados Unidos.
+                </p>
+                <div class="producer-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Productor</span>
+                        <span class="meta-value">rajat parr</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Región</span>
+                        <span class="meta-value">California</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">País</span>
+                        <span class="meta-value">EEUU</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WINES SECTION -->
+    <section class="wines-section">
+        <div class="wines-header">
+            <h2 class="wines-title">Nuestra Selección de la Bodega</h2>
+        </div>
+
+        <div class="wines-grid">
+            <!-- Brij Oso Rouge -->
+            <div class="wine-bottle-card">
+                <div class="bottle-img-wrapper">
+                    <img src="vinos/phelan oso brij rouge.webp" alt="Brij Oso Rouge 2023">
+                </div>
+                <h3 class="wine-name">Brij Oso Rouge</h3>
+                <div class="wine-type">Blend — 2023</div>
+                <p class="wine-desc">Mouvedre - Grenache de viñedos costeros. Fresco, expresivo, con fruta
+                    oscura y tensión salina.</p>
+            </div>
+
+            <!-- Brij Chardonnay -->
+            <div class="wine-bottle-card">
+                <div class="bottle-img-wrapper">
+                    <img src="vinos/phelan brij chardonnay.jpg" alt="Brij Chardonnay 2023">
+                </div>
+                <h3 class="wine-name">Brij Chardonnay</h3>
+                <div class="wine-type">Chardonnay — 2023</div>
+                <p class="wine-desc">Chardonnay fresca y mineral, marcada por la influencia del Pacífico. Salinidad,
+                    energía y un final largo.</p>
+            </div>
+
+            <!-- Phelan Farm Pinot Noir -->
+            <div class="wine-bottle-card">
+                <div class="bottle-img-wrapper">
+                    <img src="vinos/Phelan-Farm-Pinot-Noir.png" alt="Phelan Farm Pinot Noir 2024">
+                </div>
+                <h3 class="wine-name">Phelan Farm Pinot Noir</h3>
+                <div class="wine-type">Pinot Noir — 2024</div>
+                <p class="wine-desc">Pinot Noir de clima frío californiano. Equilibrio, claridad y una expresión precisa
+                    del lugar.</p>
+            </div>
+
+            <!-- Phelan Farm Chardonnay -->
+            <div class="wine-bottle-card">
+                <div class="bottle-img-wrapper">
+                    <img src="vinos/Phelan Farm Chardonnay.webp" alt="Phelan Farm Chardonnay 2023">
+                </div>
+                <h3 class="wine-name">Phelan Farm Chardonnay</h3>
+                <div class="wine-type">Chardonnay — 2023</div>
+                <p class="wine-desc">Chardonnay con tensión y claridad. Vinificación precisa que prioriza la energía
+                    por sobre la potencia.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>pepichis</h3>
+                <p>Importamos vinos de productores que admiramos.<br>Vinos con identidad, origen y carácter.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Contacto</h4>
+                <ul>
+                    <li><a href="mailto:wines@pepichis.com">wines@pepichis.com</a></li>
+                    <li><a href="#">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Pepichis. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+
+
+        // ============================================
+        // PRODUCER HERO ENTRANCE ANIMATION
+        // ============================================
+        const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+        heroTl
+            .from('.producer-photo-main', {
+                opacity: 0,
+                x: -60,
+                duration: 1,
+                delay: 0.3
+            })
+            .from('.producer-illustration', {
+                opacity: 0,
+                scale: 0.7,
+                x: 30,
+                y: 30,
+                duration: 0.8,
+            }, '-=0.5')
+            .from('.breadcrumb', {
+                opacity: 0,
+                y: -20,
+                duration: 0.5
+            }, '-=0.7')
+            .from('.producer-region-tag', {
+                opacity: 0,
+                y: 20,
+                duration: 0.5
+            }, '-=0.4')
+            .from('.producer-name', {
+                opacity: 0,
+                y: 40,
+                duration: 0.7
+            }, '-=0.3')
+            .from('.producer-description', {
+                opacity: 0,
+                y: 30,
+                duration: 0.6
+            }, '-=0.3')
+            .from('.meta-item', {
+                opacity: 0,
+                y: 20,
+                duration: 0.5,
+                stagger: 0.1
+            }, '-=0.3');
+
+        // ============================================
+        // WINE BOTTLE CARDS - SCROLL REVEAL
+        // ============================================
+        document.querySelectorAll('.wine-bottle-card').forEach((card, i) => {
+            gsap.to(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top bottom-=60',
+                    end: 'top center',
+                    scrub: 1
+                },
+                opacity: 1,
+                y: 0,
+                ease: 'power2.out'
+            });
+        });
+
+        // ============================================
+        // HEADER SHRINK ON SCROLL
+        // ============================================
+        const headerEl = document.querySelector('header');
+        let lastScrolled = false;
+
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY > 50;
+            if (scrolled !== lastScrolled) {
+                lastScrolled = scrolled;
+                if (scrolled) {
+                    headerEl.classList.add('header-scrolled');
+                } else {
+                    headerEl.classList.remove('header-scrolled');
+                }
+            }
+        }, { passive: true });
+        // ============================================
+        // MOBILE HAMBURGER MENU
+        // ============================================
+        (function () {
+            const hamburger = document.getElementById('hamburgerBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+                document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+            });
+
+            document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+        })();
+    </script>
+</body>
+
+</html>

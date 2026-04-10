@@ -1,0 +1,568 @@
+:root {
+    --bg: #f4efe7;
+    --surface: #fbf7f1;
+    --surface-strong: #e9ded0;
+    --text: #2f2926;
+    --muted: #736863;
+    --accent: #8f1d2c;
+    --accent-soft: #d5a56a;
+    --line: rgba(47, 41, 38, 0.12);
+    --shadow: 0 22px 60px rgba(81, 48, 31, 0.12);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text);
+    background:
+        radial-gradient(circle at top left, rgba(213, 165, 106, 0.18), transparent 28%),
+        linear-gradient(180deg, #f7f2ea 0%, #f4efe7 100%);
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.site-shell {
+    min-height: 100vh;
+}
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    backdrop-filter: blur(14px);
+    background: rgba(244, 239, 231, 0.86);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.site-header.is-scrolled {
+    border-color: var(--line);
+    box-shadow: 0 10px 30px rgba(47, 41, 38, 0.08);
+}
+
+.nav-bar,
+.hero-section,
+.story-section,
+.catalog-section,
+.page-hero,
+.producer-detail-hero,
+.site-footer {
+    width: min(1180px, calc(100% - 40px));
+    margin: 0 auto;
+}
+
+.nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 78px;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: lowercase;
+}
+
+.brand-mark {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    font-size: 0.96rem;
+}
+
+.nav-links a,
+.mobile-nav a {
+    position: relative;
+    color: var(--muted);
+}
+
+.nav-links a.is-active,
+.nav-links a:hover,
+.mobile-nav a:hover {
+    color: var(--accent);
+}
+
+.nav-toggle {
+    display: none;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.nav-toggle span {
+    width: 18px;
+    height: 2px;
+    background: var(--text);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.nav-toggle.is-open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle.is-open span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle.is-open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+.mobile-nav {
+    display: none;
+    padding: 0 0 18px;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.mobile-nav.is-open {
+    display: flex;
+}
+
+.hero-section,
+.page-hero,
+.producer-detail-hero {
+    display: grid;
+    gap: 32px;
+    padding: 56px 0 34px;
+}
+
+.hero-section {
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    min-height: calc(100vh - 78px);
+}
+
+.page-hero {
+    grid-template-columns: 1fr 280px;
+    align-items: end;
+}
+
+.page-hero-compact {
+    min-height: 0;
+}
+
+.producer-detail-hero {
+    grid-template-columns: minmax(280px, 460px) 1fr;
+    align-items: center;
+}
+
+.eyebrow,
+.footer-kicker,
+.hero-card-label,
+.wine-card-producer,
+.producer-card-location {
+    color: var(--accent);
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+h1,
+h2,
+h3,
+p {
+    margin: 0;
+}
+
+.hero-copy h1,
+.page-hero-copy h1,
+.producer-detail-copy h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 600;
+    line-height: 0.96;
+    letter-spacing: -0.03em;
+}
+
+.hero-copy h1 {
+    font-size: clamp(3.5rem, 8vw, 6.4rem);
+    max-width: 9ch;
+}
+
+.page-hero-copy h1,
+.producer-detail-copy h1 {
+    font-size: clamp(2.8rem, 6vw, 4.8rem);
+    margin-bottom: 12px;
+}
+
+.lead,
+.hero-copy .lead,
+.page-hero-copy .lead,
+.producer-detail-description,
+.story-card p,
+.wine-card-copy,
+.producer-card-body p,
+.hero-card-body p {
+    color: var(--muted);
+    font-size: 1.02rem;
+    line-height: 1.75;
+}
+
+.hero-copy .lead {
+    max-width: 54ch;
+    margin-top: 22px;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 28px;
+}
+
+.button-primary,
+.button-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0 20px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+
+.button-primary {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+}
+
+.button-secondary {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.button-primary:hover,
+.button-secondary:hover,
+.hero-card-body a:hover,
+.footer-links a:hover {
+    transform: translateY(-2px);
+}
+
+.hero-visual {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.hero-card,
+.story-card,
+.wine-card,
+.producer-card,
+.stat-card {
+    background: rgba(251, 247, 241, 0.82);
+    border: 1px solid rgba(47, 41, 38, 0.08);
+    box-shadow: var(--shadow);
+}
+
+.hero-card {
+    width: min(420px, 100%);
+    padding: 18px;
+    border-radius: 28px;
+}
+
+.hero-card img,
+.producer-detail-media img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: 18px;
+}
+
+.hero-card-body {
+    padding: 16px 6px 8px;
+}
+
+.hero-card-location {
+    margin: 8px 0;
+    color: var(--muted);
+}
+
+.hero-card-body h2,
+.section-heading h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2rem, 4vw, 3.4rem);
+    line-height: 1;
+    margin: 10px 0 12px;
+}
+
+.hero-card-body a {
+    display: inline-flex;
+    margin-top: 18px;
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.story-section,
+.catalog-section {
+    padding: 34px 0 40px;
+}
+
+.story-card {
+    padding: 32px;
+    border-radius: 28px;
+}
+
+.story-card h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin: 10px 0 14px;
+    max-width: 16ch;
+}
+
+.section-heading {
+    margin-bottom: 28px;
+}
+
+.section-heading h2 {
+    max-width: 12ch;
+}
+
+.wine-grid,
+.producer-grid {
+    display: grid;
+    gap: 22px;
+}
+
+.wine-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.producer-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.wine-card,
+.producer-card {
+    border-radius: 26px;
+    overflow: hidden;
+}
+
+.wine-card {
+    padding: 22px;
+}
+
+.wine-image-wrap {
+    display: grid;
+    place-items: center;
+    min-height: 320px;
+    background: linear-gradient(180deg, rgba(233, 222, 208, 0.4), rgba(233, 222, 208, 0.08));
+    border-radius: 18px;
+    margin-bottom: 18px;
+}
+
+.wine-image-wrap img {
+    max-height: 280px;
+    object-fit: contain;
+}
+
+.wine-card h3,
+.producer-card h3 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.7rem;
+    margin: 8px 0;
+}
+
+.wine-card-meta {
+    color: var(--muted);
+    margin-bottom: 12px;
+}
+
+.producer-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+.producer-card-media {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+}
+
+.producer-card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.producer-card:hover .producer-card-media img {
+    transform: scale(1.05);
+}
+
+.producer-card-body {
+    padding: 22px;
+}
+
+.page-hero-stats,
+.stat-card {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.stat-card {
+    width: 100%;
+    min-height: 180px;
+    padding: 24px;
+    border-radius: 28px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+}
+
+.stat-card span {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 4rem;
+    line-height: 1;
+}
+
+.stat-card p,
+.breadcrumb-line,
+.producer-detail-location {
+    color: var(--muted);
+}
+
+.producer-detail-media {
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.breadcrumb-line {
+    display: flex;
+    gap: 10px;
+    margin: 8px 0 18px;
+    font-size: 0.94rem;
+}
+
+.producer-detail-location {
+    margin-bottom: 18px;
+    font-size: 1rem;
+}
+
+.producer-detail-description p + p {
+    margin-top: 12px;
+}
+
+.site-footer {
+    padding: 60px 0 44px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 28px;
+    padding: 28px 0 18px;
+    border-top: 1px solid var(--line);
+}
+
+.footer-grid h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    line-height: 1.05;
+    margin-top: 8px;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+    color: var(--muted);
+}
+
+.footer-copy {
+    margin-top: 18px;
+    color: var(--muted);
+    font-size: 0.92rem;
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (max-width: 1024px) {
+    .hero-section,
+    .page-hero,
+    .producer-detail-hero,
+    .wine-grid,
+    .producer-grid,
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .hero-section,
+    .page-hero,
+    .producer-detail-hero {
+        align-items: start;
+    }
+}
+
+@media (max-width: 780px) {
+    .nav-links {
+        display: none;
+    }
+
+    .nav-toggle {
+        display: inline-flex;
+    }
+
+    .hero-section,
+    .page-hero,
+    .producer-detail-hero,
+    .wine-grid,
+    .producer-grid,
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-section {
+        min-height: 0;
+        padding-top: 32px;
+    }
+
+    .wine-image-wrap {
+        min-height: 260px;
+    }
+}

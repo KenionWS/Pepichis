@@ -1,0 +1,31 @@
+.DS_Store
+Thumbs.db
+
+# Local environment
+.env
+.env.*
+!.env.example
+
+# Root runtime/content
+uploads/
+
+# Laravel app
+/admin/.env
+/admin/vendor/
+/admin/node_modules/
+/admin/public/hot
+/admin/public/storage
+/admin/storage/*.key
+/admin/storage/app/public
+/admin/storage/framework/cache/*
+/admin/storage/framework/sessions/*
+/admin/storage/framework/testing/*
+/admin/storage/framework/views/*
+/admin/storage/logs/*
+/admin/bootstrap/cache/*.php
+/admin/database/database.sqlite
+/admin/.phpunit.result.cache
+
+# IDEs
+.idea/
+.vscode/
