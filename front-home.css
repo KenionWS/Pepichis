@@ -138,11 +138,41 @@
             position: absolute;
             top: 0; }
 .producer-card-back::before { content: ""; position: absolute; inset: 0; background: linear-gradient(135deg, transparent 0%, rgba(128, 0, 32, 0.04) 100%); }
-.producer-content { position: relative; z-index: 2; }
+.producer-content { position: relative; z-index: 2; display: flex; flex-direction: column; height: 100%; }
 .producer-content .producer-region { font-size: 0.6rem; letter-spacing: 1px; text-transform: uppercase; color: var(--wine-red); margin-bottom: 0.8rem; opacity: 0.8; }
 .producer-card-back h3 { font-family: "TAN-NIMBUS", serif; font-size: 1.5rem; font-weight: normal; margin-bottom: 1.5rem; font-style: italic; text-transform: lowercase; }
-.producer-card-back p { font-size: 0.7rem; line-height: 1.75; opacity: 0.8; margin-bottom: 2rem; text-transform: uppercase; }
-.producer-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--wine-red); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+.producer-card-back p { font-size: 0.7rem; line-height: 1.75; opacity: 0.8; margin-bottom: 1.5rem; text-transform: uppercase; }
+.producer-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    min-height: 52px;
+    margin-top: auto;
+    padding: 0.95rem 1.15rem;
+    border-radius: 16px;
+    border: 1px solid rgba(128, 0, 32, 0.16);
+    background: rgba(255, 255, 255, 0.34);
+    color: var(--wine-red);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    touch-action: manipulation;
+    position: relative;
+    z-index: 3;
+    transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+.producer-link::after {
+    content: "\2192";
+    font-size: 0.95rem;
+    line-height: 1;
+}
+.producer-link:hover {
+    background: rgba(255, 255, 255, 0.5);
+    border-color: rgba(128, 0, 32, 0.24);
+    transform: translateY(-1px);
+}
 
 .cta-section { padding: 5rem 6rem 7rem; background: var(--wine-deep); position: relative; z-index: 2; }
 .cta-inner, .page-intro-inner { max-width: 1000px; margin: 0 auto; }
