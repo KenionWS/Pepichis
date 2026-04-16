@@ -26,13 +26,42 @@
         .about-page {
             min-height: 100vh;
             padding: 10rem 6rem 6rem;
+            overflow: hidden;
             background:
                 radial-gradient(circle at top left, rgba(255, 231, 214, 0.58), transparent 28%),
                 radial-gradient(circle at 85% 12%, rgba(219, 205, 255, 0.24), transparent 20%),
                 linear-gradient(180deg, var(--pink) 0%, #f5ede4 100%);
         }
 
+        .about-page::before,
+        .about-page::after {
+            content: "";
+            position: absolute;
+            border-radius: 999px;
+            pointer-events: none;
+            filter: blur(6px);
+            opacity: 0.6;
+        }
+
+        .about-page::before {
+            top: 9rem;
+            right: 8%;
+            width: 12rem;
+            height: 12rem;
+            background: radial-gradient(circle, rgba(165, 195, 108, 0.28) 0%, rgba(165, 195, 108, 0) 72%);
+        }
+
+        .about-page::after {
+            bottom: 8rem;
+            left: 4%;
+            width: 16rem;
+            height: 16rem;
+            background: radial-gradient(circle, rgba(128, 0, 32, 0.12) 0%, rgba(128, 0, 32, 0) 72%);
+        }
+
         .about-page-shell {
+            position: relative;
+            z-index: 1;
             max-width: 1400px;
             margin: 0 auto;
             display: grid;
@@ -44,6 +73,10 @@
         .about-page-intro {
             position: sticky;
             top: 8rem;
+        }
+
+        .about-page-intro > * {
+            will-change: transform, opacity;
         }
 
         .about-page-eyebrow {
@@ -82,12 +115,15 @@
         }
 
         .about-page-block {
+            position: relative;
             padding: 1.75rem 1.85rem;
             border-radius: 28px;
             border: 1px solid rgba(109, 24, 52, 0.08);
             background: rgba(255, 250, 243, 0.82);
             box-shadow: 0 18px 36px rgba(109, 24, 52, 0.05);
             color: var(--charcoal);
+            transform-origin: top center;
+            will-change: transform, opacity;
         }
 
         .about-page-block > :first-child {
@@ -202,6 +238,64 @@
             }
         }
     </style>
+@endpush
+
+@push('scripts')
+    <script>
+        (function () {
+            if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+                return;
+            }
+
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                return;
+            }
+
+            gsap.registerPlugin(ScrollTrigger);
+
+            document.addEventListener('DOMContentLoaded', function () {
+                const intro = document.querySelector('.about-page-intro');
+                const eyebrow = document.querySelector('.about-page-eyebrow');
+                const title = document.querySelector('.about-page-title');
+                const lead = document.querySelector('.about-page-lead');
+                const block = document.querySelector('.about-page-block');
+                const section = document.querySelector('.about-page');
+
+                if (!intro || !title || !lead || !block || !section) {
+                    return;
+                }
+
+                const introTimeline = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+                introTimeline
+                    .from(intro, { opacity: 0, y: 28, duration: 0.8 })
+                    .from([eyebrow, title, lead].filter(Boolean), { opacity: 0, y: 22, duration: 0.7, stagger: 0.12 }, '-=0.45')
+                    .from(block, { opacity: 0, y: 34, rotateX: -5, duration: 0.95 }, '-=0.55');
+
+                gsap.to(title, {
+                    yPercent: -10,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top bottom',
+                        end: 'bottom top',
+                        scrub: true,
+                    },
+                });
+
+                gsap.to(block, {
+                    y: -18,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top 75%',
+                        end: 'bottom top',
+                        scrub: true,
+                    },
+                });
+            });
+        })();
+    </script>
 @endpush
 
 @section('content')
