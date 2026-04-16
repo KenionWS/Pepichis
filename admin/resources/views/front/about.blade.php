@@ -272,17 +272,6 @@
                     .from([eyebrow, title, lead].filter(Boolean), { opacity: 0, y: 22, duration: 0.7, stagger: 0.12 }, '-=0.45')
                     .from(block, { opacity: 0, y: 34, rotateX: -5, duration: 0.95 }, '-=0.55');
 
-                gsap.to(title, {
-                    yPercent: -10,
-                    ease: 'none',
-                    scrollTrigger: {
-                        trigger: section,
-                        start: 'top bottom',
-                        end: 'bottom top',
-                        scrub: true,
-                    },
-                });
-
                 gsap.to(block, {
                     y: -18,
                     ease: 'none',
