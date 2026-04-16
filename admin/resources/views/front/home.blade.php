@@ -79,7 +79,7 @@
             @foreach ($producers as $producer)
                 @php
                     $location = collect([$producer->city, $producer->state, $producer->country])->filter()->join(', ');
-                    $description = \Illuminate\Support\Str::limit(trim(strip_tags($producer->short_description)), 190);
+                    $description = \Illuminate\Support\Str::limit(trim(strip_tags($producer->short_description)), 350);
                     $producerAlt = trim($producer->name . ($location ? ', productor de vinos en ' . $location : ', productor de vinos'));
                 @endphp
                 <div class="producer-card-container">
