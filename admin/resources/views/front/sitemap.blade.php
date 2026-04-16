@@ -7,9 +7,21 @@
         <lastmod>{{ now()->toAtomString() }}</lastmod>
     </url>
     <url>
+        <loc>{{ route('front.about') }}</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+        <lastmod>{{ now()->toAtomString() }}</lastmod>
+    </url>
+    <url>
         <loc>{{ route('front.producers.index') }}</loc>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
+        <lastmod>{{ now()->toAtomString() }}</lastmod>
+    </url>
+    <url>
+        <loc>{{ route('front.notes.index') }}</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
         <lastmod>{{ now()->toAtomString() }}</lastmod>
     </url>
 @foreach ($producers as $producer)
