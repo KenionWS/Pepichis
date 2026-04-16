@@ -25,8 +25,8 @@ class MenuItemController extends Controller
     {
         return view('menu-items.form', [
             'menuItem' => new MenuItem([
-                'item_type' => MenuItem::TYPE_HOME_SECTION,
-                'item_value' => 'nosotros',
+                'item_type' => MenuItem::TYPE_ROUTE,
+                'item_value' => 'front.about',
                 'is_active' => true,
                 'open_in_new_tab' => false,
             ]),

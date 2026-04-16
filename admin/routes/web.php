@@ -14,6 +14,7 @@ use App\Models\Producer;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontController::class, 'home'])->name('front.home');
+Route::get('/nosotros', [FrontController::class, 'about'])->name('front.about');
 Route::get('/productores', [FrontController::class, 'producers'])->name('front.producers.index');
 Route::get('/productores/{producer:slug}', [FrontController::class, 'producerDetail'])->name('front.producers.show');
 Route::get('/notas', [FrontController::class, 'notes'])->name('front.notes.index');

@@ -38,11 +38,22 @@ class FrontController extends Controller
         return view('front.home', [
             'producers' => $producers,
             'bottleItems' => $bottleItems->take(24)->values(),
-            'aboutSection' => $this->aboutSection(),
             'latestNotes' => Note::published()
                 ->orderByDesc('published_at')
                 ->take(3)
                 ->get(),
+        ]);
+    }
+
+    public function about(): View
+    {
+        $aboutSection = $this->aboutSection();
+        $aboutMetaDescription = trim(strip_tags($aboutSection->body));
+        $aboutMetaDescription = mb_strimwidth(preg_replace('/\s+/', ' ', $aboutMetaDescription), 0, 170, '...');
+
+        return view('front.about', [
+            'aboutSection' => $aboutSection,
+            'aboutMetaDescription' => $aboutMetaDescription,
         ]);
     }
 

@@ -40,8 +40,12 @@ class AppServiceProvider extends ServiceProvider
                         $href = '#';
 
                         if ($item->item_type === MenuItem::TYPE_HOME_SECTION) {
-                            $homeAnchor = request()->routeIs('front.home') ? '' : route('front.home');
-                            $href = $homeAnchor . '#' . ltrim($item->item_value, '#');
+                            if ($item->item_value === 'nosotros') {
+                                $href = route('front.about');
+                            } else {
+                                $homeAnchor = request()->routeIs('front.home') ? '' : route('front.home');
+                                $href = $homeAnchor . '#' . ltrim($item->item_value, '#');
+                            }
                         }
 
                         if ($item->item_type === MenuItem::TYPE_ROUTE && Route::has($item->item_value)) {
@@ -65,7 +69,7 @@ class AppServiceProvider extends ServiceProvider
                 $homeAnchor = request()->routeIs('front.home') ? '' : route('front.home');
 
                 $menuItems = [
-                    (object) ['label' => 'Nosotros', 'href' => $homeAnchor . '#nosotros', 'open_in_new_tab' => false],
+                    (object) ['label' => 'Nosotros', 'href' => route('front.about'), 'open_in_new_tab' => false],
                     (object) ['label' => 'Seleccion', 'href' => $homeAnchor . '#seleccion', 'open_in_new_tab' => false],
                     (object) ['label' => 'Productores', 'href' => $homeAnchor . '#productores', 'open_in_new_tab' => false],
                     (object) ['label' => 'Notas', 'href' => route('front.notes.index'), 'open_in_new_tab' => false],

@@ -1,10 +1,10 @@
 @extends('layouts.app', ['title' => 'Nosotros'])
 
 @section('content')
-    <div class="topbar">
+        <div class="topbar">
         <div>
             <h1 class="page-title">Nosotros</h1>
-            <p class="page-copy">Edita el texto institucional que se muestra en el home. Puedes separar parrafos dejando una linea en blanco entre cada bloque.</p>
+            <p class="page-copy">Edita la pagina institucional de Pepichis. Puedes aplicar estilos basicos para ordenar mejor el contenido en el front.</p>
         </div>
     </div>
 
@@ -23,11 +23,20 @@
                 <input id="title" name="title" value="{{ old('title', $siteText->title) }}" required>
             </div>
 
-            <div class="form-field full">
-                <label for="body">Texto</label>
-                <textarea id="body" name="body" rows="16" required>{{ old('body', $siteText->body) }}</textarea>
-                <div class="help">El front respeta parrafos separados por una linea en blanco.</div>
-            </div>
+            @include('partials.rich-text-editor', [
+                'id' => 'body',
+                'name' => 'body',
+                'label' => 'Texto',
+                'value' => $siteText->body,
+                'placeholder' => 'Cuenta la historia de Pepichis con parrafos, subtitulos, citas y listas.',
+                'hint' => 'Puedes usar parrafos, H2, H3, citas, listas, negrita, cursiva y links.',
+                'blockFormats' => [
+                    'p' => 'Parrafo',
+                    'h2' => 'H2',
+                    'h3' => 'H3',
+                    'blockquote' => 'Cita',
+                ],
+            ])
         </div>
 
         <div class="actions">
@@ -40,3 +49,17 @@
         </div>
     </form>
 @endsection
+
+@push('scripts')
+    <style>
+        .rich-editor-toolbar select {
+            min-width: 120px;
+            width: auto;
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(150, 113, 94, 0.18);
+            background: rgba(255, 255, 255, 0.92);
+            font-size: 13px;
+        }
+    </style>
+@endpush

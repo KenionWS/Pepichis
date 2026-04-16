@@ -788,7 +788,19 @@
                         });
                     });
 
+                    editor.querySelectorAll('[data-action="formatBlock"]').forEach((control) => {
+                        control.addEventListener('change', () => {
+                            document.execCommand('formatBlock', false, '<' + control.value + '>');
+                            surface.focus();
+                            sync();
+                        });
+                    });
+
                     editor.querySelectorAll('[data-action]').forEach((button) => {
+                        if (button.tagName === 'SELECT') {
+                            return;
+                        }
+
                         button.addEventListener('click', () => {
                             if (button.dataset.action === 'link') {
                                 const url = window.prompt('Pegá la URL del link');

@@ -58,25 +58,6 @@
         </div>
     </section>
 
-    <section class="about-section" id="nosotros">
-        <div class="about-shell">
-            <div class="about-intro">
-                @if($aboutSection->eyebrow)
-                    <span class="about-eyebrow">{{ $aboutSection->eyebrow }}</span>
-                @endif
-                <h2 class="about-title">{{ $aboutSection->title }}</h2>
-                <p class="about-lead">Importamos desde la admiracion, la curiosidad y el deseo de acercar botellas con identidad real a mesas que saben apreciarlas.</p>
-            </div>
-
-            <div class="about-body">
-                @foreach(preg_split("/\r\n\r\n|\n\n|\r\r/", trim($aboutSection->body)) as $paragraph)
-                    @continue(trim($paragraph) === '')
-                    <p>{{ trim($paragraph) }}</p>
-                @endforeach
-            </div>
-        </div>
-    </section>
-
     <section class="split-intro" id="seleccion">
         <div class="bottles-sticky">
             <div class="bottles-grid">

@@ -53,84 +53,6 @@
 }
 
 .split-intro { position: relative; }
-.about-section {
-    position: relative;
-    padding: 6rem 6rem 6.5rem;
-    background:
-        radial-gradient(circle at top left, rgba(182, 151, 115, 0.12), transparent 26%),
-        linear-gradient(180deg, #f7efe5 0%, #f2e8dc 100%);
-}
-
-.about-shell {
-    max-width: 1400px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: minmax(260px, 0.9fr) minmax(0, 1.4fr);
-    gap: 3.5rem;
-    align-items: start;
-}
-
-.about-intro {
-    position: sticky;
-    top: 120px;
-}
-
-.about-eyebrow {
-    display: inline-block;
-    margin-bottom: 1rem;
-    font-size: 0.72rem;
-    letter-spacing: 0.3rem;
-    text-transform: uppercase;
-    color: var(--wine-red);
-}
-
-.about-title {
-    margin: 0 0 1.25rem;
-    font-family: "TAN-NIMBUS", serif;
-    font-size: 3rem;
-    line-height: 1.2;
-    font-style: italic;
-    font-weight: 400;
-    text-transform: lowercase;
-    color: var(--wine-red);
-}
-
-.about-lead {
-    max-width: 26rem;
-    margin: 0;
-    font-size: 0.85rem;
-    line-height: 1.9;
-    letter-spacing: 0.14rem;
-    text-transform: uppercase;
-    color: rgba(83, 46, 44, 0.78);
-}
-
-.about-body {
-    display: grid;
-    gap: 1.35rem;
-}
-
-.about-body p {
-    margin: 0;
-    padding: 1.6rem 1.8rem;
-    border: 1px solid rgba(109, 24, 52, 0.08);
-    border-radius: 28px;
-    background: rgba(255, 250, 243, 0.78);
-    box-shadow: 0 18px 36px rgba(109, 24, 52, 0.05);
-    font-size: 1.05rem;
-    line-height: 1.95;
-    color: var(--charcoal);
-}
-
-.about-body p:first-child,
-.about-body p:last-child {
-    font-family: "TAN-NIMBUS", serif;
-    font-size: 1.45rem;
-    line-height: 1.55;
-    font-style: italic;
-    color: var(--wine-red);
-}
-
 .bottles-sticky {
     position: relative;
     min-height: 100vh;
@@ -270,9 +192,6 @@
 @media (max-width: 1024px) {
     .hero { padding: 7rem 2rem 3rem; flex-direction: column; justify-content: center; gap: 2rem; height: auto; min-height: 100vh; }
     .hero-illustration { width: 55%; }
-    .about-section { padding: 4rem 2rem 4.5rem; }
-    .about-shell { grid-template-columns: 1fr; gap: 2rem; }
-    .about-intro { position: static; }
     .bottles-grid { grid-template-columns: repeat(4, 1fr); gap: 2rem; padding: 2rem; }
     .producers-section, .cta-section, .page-intro { padding-left: 2rem; padding-right: 2rem; }
     .producer-card-container { width: calc((100% - 2.5rem) / 2); }
@@ -283,12 +202,6 @@
     .hero h1 { font-size: 2.1rem; }
     .hero p { font-size: 1rem; }
     .hero-illustration { width: 80%; }
-    .about-section { padding: 3.5rem 1.5rem 4rem; }
-    .about-title { font-size: 2.2rem; }
-    .about-lead { max-width: none; font-size: 0.76rem; letter-spacing: 0.11rem; }
-    .about-body p { padding: 1.25rem 1.2rem; font-size: 0.95rem; line-height: 1.8; }
-    .about-body p:first-child,
-    .about-body p:last-child { font-size: 1.15rem; }
     .bottles-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; padding: 1.5rem; }
     .section-title, .cta-inner h2, .page-intro-inner h1 { font-size: 2rem; }
     .producer-card-container { width: 100%; }

@@ -39,7 +39,6 @@ class MenuItem extends Model
     public static function homeSectionOptions(): array
     {
         return [
-            'nosotros' => 'Nosotros',
             'seleccion' => 'Seleccion',
             'productores' => 'Productores',
             'contacto' => 'Contacto',
@@ -50,6 +49,7 @@ class MenuItem extends Model
     {
         return [
             'front.home' => 'Home',
+            'front.about' => 'Nosotros',
             'front.producers.index' => 'Listado de productores',
             'front.notes.index' => 'Notas',
         ];
