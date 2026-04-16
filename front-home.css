@@ -202,5 +202,5 @@
     .hero-illustration { width: 80%; }
     .bottles-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; padding: 1.5rem; }
     .section-title, .cta-inner h2, .page-intro-inner h1 { font-size: 2rem; }
-    .producer-card-container { width: 100%; }
+    .producer-card-container { width: 100%;height: 450px; }
 }
