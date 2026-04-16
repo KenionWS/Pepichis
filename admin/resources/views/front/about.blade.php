@@ -26,7 +26,7 @@
         .about-page {
             min-height: 100vh;
             padding: 10rem 6rem 6rem;
-            overflow: hidden;
+            position: relative;
             background:
                 radial-gradient(circle at top left, rgba(255, 231, 214, 0.58), transparent 28%),
                 radial-gradient(circle at 85% 12%, rgba(219, 205, 255, 0.24), transparent 20%),
