@@ -48,13 +48,32 @@
 @endpush
 
 @section('content')
-    <section class="hero" id="nosotros">
+    <section class="hero">
         <div class="hero-content">
             <h1 id="hero-typed"></h1>
             <p id="hero-typed-p"></p>
         </div>
         <div class="hero-illustration" id="hero-copas">
             <img src="{{ asset('copas.svg') }}" alt="Ilustraci&oacute;n de copas de vino de Pepichis" width="700" height="700" fetchpriority="high">
+        </div>
+    </section>
+
+    <section class="about-section" id="nosotros">
+        <div class="about-shell">
+            <div class="about-intro">
+                @if($aboutSection->eyebrow)
+                    <span class="about-eyebrow">{{ $aboutSection->eyebrow }}</span>
+                @endif
+                <h2 class="about-title">{{ $aboutSection->title }}</h2>
+                <p class="about-lead">Importamos desde la admiracion, la curiosidad y el deseo de acercar botellas con identidad real a mesas que saben apreciarlas.</p>
+            </div>
+
+            <div class="about-body">
+                @foreach(preg_split("/\r\n\r\n|\n\n|\r\r/", trim($aboutSection->body)) as $paragraph)
+                    @continue(trim($paragraph) === '')
+                    <p>{{ trim($paragraph) }}</p>
+                @endforeach
+            </div>
         </div>
     </section>
 

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Note;
 use App\Models\Producer;
+use App\Models\SiteText;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\View\View;
 
 class FrontController extends Controller
@@ -36,6 +38,7 @@ class FrontController extends Controller
         return view('front.home', [
             'producers' => $producers,
             'bottleItems' => $bottleItems->take(24)->values(),
+            'aboutSection' => $this->aboutSection(),
             'latestNotes' => Note::published()
                 ->orderByDesc('published_at')
                 ->take(3)
@@ -87,5 +90,16 @@ class FrontController extends Controller
                 ->take(3)
                 ->get(),
         ]);
+    }
+
+    private function aboutSection(): SiteText
+    {
+        if (! Schema::hasTable('site_texts')) {
+            return new SiteText(SiteText::defaultAbout());
+        }
+
+        return SiteText::query()
+            ->where('key', SiteText::KEY_ABOUT)
+            ->first() ?? new SiteText(SiteText::defaultAbout());
     }
 }

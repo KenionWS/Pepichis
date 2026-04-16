@@ -7,6 +7,7 @@ use App\Http\Controllers\FrontController;
 use App\Http\Controllers\MenuItemController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\ProducerController;
+use App\Http\Controllers\SiteTextController;
 use App\Http\Controllers\WineController;
 use App\Models\Note;
 use App\Models\Producer;
@@ -46,6 +47,8 @@ Route::prefix('adminppch1s')->group(function () {
         Route::post('/wines/reorder', [WineController::class, 'reorder'])->name('wines.reorder');
         Route::post('/menu-items/reorder', [MenuItemController::class, 'reorder'])->name('menu-items.reorder');
         Route::post('/notes/editor-image', [NoteController::class, 'storeEditorImage'])->name('notes.editor-image.store');
+        Route::get('/nosotros', [SiteTextController::class, 'editAbout'])->name('site-texts.about.edit');
+        Route::put('/nosotros', [SiteTextController::class, 'updateAbout'])->name('site-texts.about.update');
         Route::resource('producers', ProducerController::class)->except(['show']);
         Route::resource('attributes', AttributeController::class)->except(['show']);
         Route::resource('wines', WineController::class)->except(['show']);

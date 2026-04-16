@@ -706,6 +706,15 @@
                         </svg>
                         <span>Notas</span>
                     </a>
+                    <a href="{{ route('site-texts.about.edit') }}" class="{{ request()->routeIs('site-texts.about.*') ? 'active' : '' }}">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+                            <path d="M12 3v18" />
+                            <path d="M5 7h9" />
+                            <path d="M5 12h14" />
+                            <path d="M5 17h10" />
+                        </svg>
+                        <span>Nosotros</span>
+                    </a>
                     <a href="{{ route('menu-items.index') }}" class="{{ request()->routeIs('menu-items.*') ? 'active' : '' }}">
                         <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
                             <path d="M4 7h16" />
