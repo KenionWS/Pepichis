@@ -108,7 +108,7 @@
 .producer-card-container { width: calc((100% - 5rem) / 3); height: 400px; perspective: 1500px; cursor: pointer; opacity: 0; transform: translateY(60px); }
 .producer-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); transform-style: preserve-3d; -webkit-transform-style: preserve-3d; }
 .producer-card-container.flipped .producer-card-inner { transform: rotateY(180deg); }
-.producer-card-face { position: absolute;width: 100%;height: 100%;backface-visibility: hidden;-webkit-backface-visibility: hidden;border-radius: 16px;overflow: hidden; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; will-change: transform, opacity; }
+.producer-card-face { position: absolute;width: 100%;height: 100%;backface-visibility: hidden;-webkit-backface-visibility: hidden;border-radius: 16px;overflow: hidden; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; will-change: transform; }
 .producer-card-front { background: var(--wine-deep); display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: 2.5rem 2rem; position: relative; }
 .silhouette-wrapper {
     position: absolute;
@@ -128,7 +128,7 @@
 .front-label .producer-region { font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: var(--wine-red); margin-bottom: 0.4rem; }
 .front-label h3 { font-family: "TAN-NIMBUS", serif; font-size: 1.5rem; font-style: italic; font-weight: normal; color: var(--charcoal); line-height: 1.3; text-transform: lowercase; }
 .front-label .highlight { background-color: var(--wine-red); color: var(--wine-deep); padding: 0 10px; }
-.producer-card-container.flipped .producer-card-front { opacity: 0; pointer-events: none; }
+.producer-card-container.flipped .producer-card-front { pointer-events: none; }
 .producer-card-back { background: var(--wine-deep);
             transform: rotateY(180deg);
             padding: 3rem;
@@ -137,9 +137,7 @@
             justify-content: center;
             color: var(--charcoal);
             position: absolute;
-            top: 0;
-            opacity: 0; }
-.producer-card-container.flipped .producer-card-back { opacity: 1; }
+            top: 0; }
 .producer-card-back::before { content: ""; position: absolute; inset: 0; background: linear-gradient(135deg, transparent 0%, rgba(128, 0, 32, 0.04) 100%); }
 .producer-content { position: relative; z-index: 2; display: flex; flex-direction: column; height: 100%; }
 .producer-content .producer-region { font-size: 0.6rem; letter-spacing: 1px; text-transform: uppercase; color: var(--wine-red); margin-bottom: 0.8rem; opacity: 0.8; }
